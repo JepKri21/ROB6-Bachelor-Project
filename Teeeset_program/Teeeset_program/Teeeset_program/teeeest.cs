@@ -40,6 +40,11 @@ namespace Teeeset_program
             int[] xbotIdArray = GetXbotIds();
             _xbotCommand.LinearMotionSI(0, xbotIdArray[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0.01, 0, 0, 0.05, 0.1);
         }
-        // 6 cm
+
+        public void rotation_around_own_axis()
+        {
+            int[] xbotIdArray = GetXbotIds();
+            _xbotCommand.ShortAxesMotionSI(0, xbotIdArray[0], POSITIONMODE.RELATIVE, 0.002, 0, 0, 4, 0.1, 0, 0, 0.3);
+        }
     }
 }

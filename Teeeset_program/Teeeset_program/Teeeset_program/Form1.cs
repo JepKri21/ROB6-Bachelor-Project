@@ -43,5 +43,10 @@ namespace Teeeset_program
         {
             _teeeest.moving_right();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            _teeeest.rotation_around_own_axis();
+        }
     }
 }
