@@ -20,14 +20,25 @@ namespace Teeeset_program
             return xbotIds;
 
         }
-        public void moving()
+
+        public void get_position()
         {
             int[] xbotIdArray = GetXbotIds();
 
             _xbotCommand.LinearMotionSI(0, xbotIdArray[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.2, 0.2, 0, 0.05, 0.1);
-            _xbotCommand.LinearMotionSI(0, xbotIdArray[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.24, 0.2, 0, 0.05, 0.1);
+            _xbotCommand.LinearMotionSI(0, xbotIdArray[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.34, 0.2, 0, 0.05, 0.1);
 
-            _xbotCommand.LinearMotionSI(0, xbotIdArray[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, -0.04, 0, 0, 0.05, 0.1);
+        }
+        public void moving_left()
+        {
+            int[] xbotIdArray = GetXbotIds();
+            _xbotCommand.LinearMotionSI(0, xbotIdArray[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, -0.01, 0, 0, 0.05, 0.1);
+        }
+
+        public void moving_right()
+        {
+            int[] xbotIdArray = GetXbotIds();
+            _xbotCommand.LinearMotionSI(0, xbotIdArray[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0.01, 0, 0, 0.05, 0.1);
         }
         // 6 cm
     }

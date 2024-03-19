@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 
 namespace Teeeset_program
-{ 
+{
     public partial class Form1 : Form
     {
 
@@ -25,13 +25,23 @@ namespace Teeeset_program
         private void button1_Click(object sender, EventArgs e)
         {
             CONNECTIONSTATUS status = _connectionHandler.ConnectAndGainMastership();
-            lbl_ConnectDisplay.Text = status.ToString();
+            // lbl_ConnectDisplay.Text = status.ToString();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _teeeest.moving();
+            _teeeest.moving_left();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _teeeest.get_position();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            _teeeest.moving_right();
         }
     }
 }
