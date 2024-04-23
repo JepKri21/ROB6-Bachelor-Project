@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj": {}
+    "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj": {
+    "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
         "projectName": "simple_pmc_mover",
-        "projectPath": "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
+        "projectPath": "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\obj\\",
+        "outputPath": "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

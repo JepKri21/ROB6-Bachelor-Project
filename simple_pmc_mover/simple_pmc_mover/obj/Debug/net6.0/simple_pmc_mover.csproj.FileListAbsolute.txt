@@ -16,3 +16,21 @@ C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj
 C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
 C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
 C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.exe
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.deps.json
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.runtimeconfig.json
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.xml
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.AssemblyReference.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfoInputs.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfo.cs
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CoreCompileInputs.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CopyComplete
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\refint\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll

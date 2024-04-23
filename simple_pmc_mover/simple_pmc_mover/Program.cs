@@ -12,15 +12,11 @@ namespace simple_pmc_mover
         private gear_lift_tests gearTest = new gear_lift_tests();
         private scissor_lift_test scissorTest = new scissor_lift_test();
         private static XBotCommands _xbotCommand = new XBotCommands();
-        private int selector = 0;
+        private int selector = 1;
 
         int[] xbot_ids;
 
-        public void defineIdList()
-        {
-            XBotIDs tempId = _xbotCommand.GetXBotIDS();
-            xbot_ids = new int[tempId.XBotIDsArray.Length];
-        }
+       
 
         /// <summary>
         /// This Function is used for calibaration of the xbot ids, it is meant to work in tandem 
@@ -33,6 +29,8 @@ namespace simple_pmc_mover
             Console.WriteLine("The ");
             Console.WriteLine("Input the ids for the Xbots in the following ");
 
+            XBotIDs tempId = _xbotCommand.GetXBotIDS();
+            xbot_ids = new int[tempId.XBotIDsArray.Length];
             for (int i = 0; i < xbot_ids.Length; i++)
             {
                 xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
@@ -49,8 +47,9 @@ namespace simple_pmc_mover
             do
             {
                 CONNECTIONSTATUS status = connectionHandler.ConnectAndGainMastership();
+                Console.WriteLine(status);
                 Console.WriteLine("Demo Program V 1.0");
-
+                
                 while (selector == 1)
                 {
                     Console.WriteLine();
@@ -220,6 +219,7 @@ namespace simple_pmc_mover
                     Console.WriteLine("0    Return ");
                     Console.WriteLine("1    Reconnect");
                     Console.WriteLine("2    Calibrate XIDs");
+                    Console.WriteLine("3    start position for lift");
                     ConsoleKeyInfo keyInfo = Console.ReadKey();
                     switch (keyInfo.KeyChar)
                     {
@@ -240,11 +240,48 @@ namespace simple_pmc_mover
 
                         case '3':
 
+                            _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.076, 0.787, 0, 0.005, 0.01);
+                            _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.076, 0.370, 0, 0.005, 0.01);
 
+                            _xbotCommand.LinearMotionSI(0, xbot_ids[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.588, 0.787- 0.0085,0, 0.005, 0.01);
+                            _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.588, 0.370-0.0085, 0, 0.005, 0.01);
 
                             break;
 
+                        case '4':
+                            //Lift the nest
+                            movement.MoveOpposite(xbot_ids[0], xbot_ids[1], 0.0005, Movement.DIRECTION.Y, 0.001, 0.01);
+                            movement.MoveOpposite(xbot_ids[2], xbot_ids[3], 0.0005, Movement.DIRECTION.Y, 0.001, 0.01);
+
+
+                            break;
+                        case '5':
+                            //Lower the nest
+                            movement.MoveOpposite(xbot_ids[0], xbot_ids[1], -0.0005, Movement.DIRECTION.Y, 0.001, 0.01);
+                            movement.MoveOpposite(xbot_ids[2], xbot_ids[3], -0.0005, Movement.DIRECTION.Y, 0.001, 0.01);
+                            break;
+
+                        case '6':
+                            // move together
+                            movement.MoveOpposite(xbot_ids[2], xbot_ids[0], 0.0005, Movement.DIRECTION.X, 0.001, 0.01);
+                            movement.MoveOpposite(xbot_ids[3], xbot_ids[1], 0.0005, Movement.DIRECTION.X, 0.001, 0.01);
+                            break;
+
+                        case '7':
+                            // move appart
+                            movement.MoveOpposite(xbot_ids[2], xbot_ids[0], -0.0005, Movement.DIRECTION.X, 0.001, 0.01);
+                            movement.MoveOpposite(xbot_ids[1], xbot_ids[3], -0.0005, Movement.DIRECTION.X, 0.001, 0.01);
+                            break;
+
+
+
+
+
+
+
                     }
+
+
 
 
                 }
