@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "8+jY29zHvQVEd4sGEYeoerSJanIk6+m3dElEF53vRA2Ea6V6nDw2l3SKk7xMKKbSNwjLsfsF0sRZlyZazfBXYA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\chris\\Desktop\\Acropos code\\csharp\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.29\\microsoft.netcore.app.host.win-x64.6.0.29.nupkg.sha512"
+  ],
+  "logs": []
+}
