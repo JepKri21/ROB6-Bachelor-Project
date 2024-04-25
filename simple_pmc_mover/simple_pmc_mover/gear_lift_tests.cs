@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace simple_pmc_mover
 {
-    internal class gear_lift_tests
+    internal class gear_lift_tests : Movement
     {
         //this class contains a collection of system commands such as connecting to the PMC, gain mastership, etc.
         private static SystemCommands _systemCommand = new SystemCommands();
@@ -28,12 +28,19 @@ namespace simple_pmc_mover
         }
 
         int[] publicIds = GetXbotIds();
+
+        public int setSelectorOne()
+        {
+            return 1;
+        }
+
+
         /// <summary>
         /// Calculates the position of the xbots when the end effector is placed facing the y-axis
         /// based on the desired x and y position of the input
         /// </summary>
         /// <returns>Position of the end-effector</returns>
-        
+
 
         public double distance(double x_1, double x_2, double y_1, double y_2)
         {
@@ -214,6 +221,49 @@ namespace simple_pmc_mover
             
 
         }
+
+        int selector = 1;
+
+        public void runGearLiftTests(int[] XID)
+        {
+            selector = 3;
+
+            Console.WriteLine(" Gear Lift tests");
+            Console.WriteLine("0    Return ");
+            Console.WriteLine("1    Reconnect");
+            Console.WriteLine("2    initial position");
+            Console.WriteLine("3    move out");
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            int[] ids = { 1, 2, 3, 4 };
+            switch (keyInfo.KeyChar)
+            {
+
+                case '0':
+                    selector = 1;
+                    break;
+
+                case '1':
+                    //example 1, run start up routine
+                    //status = connectionHandler.ConnectAndGainMastership();
+                    break;
+                case '2':
+                    //Move the xbots further apart
+                    int[] ids2 = { 1, 2 };
+                    InitialPosition(4, ids);
+                    break;
+                case '3':
+                    move_xbot_out(ids);
+                    break;
+                case '4':
+                    move_xbot_in(ids);
+                    break;
+                case '\u001b': //escape key
+                    return; //exit the program
+
+
+            }
+        }
+
 
     }
 }

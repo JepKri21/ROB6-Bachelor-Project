@@ -39,7 +39,7 @@ namespace simple_pmc_mover
         /// </summary>
         public double MoveRelativeTogether(int xbot1, int xbot2, double distance, DIRECTION direction, double maxSpeed, double maxAcc)
         {
-            int[] xbots = {xbot1, xbot2 };
+            int[] xbots = { xbot1, xbot2 };
             double total_motion_time = 0;
             switch (direction)
             {
@@ -70,10 +70,10 @@ namespace simple_pmc_mover
             double total_motion_time = 0;
 
             switch (direction)
-            { 
+            {
                 case DIRECTION.X:
 
-                    MotionRtn first_xbotX = _xbotCommand.LinearMotionSI(0, first_xbot, POSITIONMODE.RELATIVE,0,-distance,0,0,maxSpeed,maxAcc);
+                    MotionRtn first_xbotX = _xbotCommand.LinearMotionSI(0, first_xbot, POSITIONMODE.RELATIVE, 0, -distance, 0, 0, maxSpeed, maxAcc);
                     MotionRtn second_xbotX = _xbotCommand.LinearMotionSI(0, second_xbot, POSITIONMODE.RELATIVE, 0, distance, 0, 0, maxSpeed, maxAcc);
                     total_motion_time = second_xbotX.TravelTimeSecs;
                     break;
@@ -89,10 +89,6 @@ namespace simple_pmc_mover
         }
 
 
-
-
-
-
         public enum DIRECTION
         {
             X,
@@ -103,12 +99,12 @@ namespace simple_pmc_mover
         public void initialPosition(int xbot4, int xbot5, int xbot6, int xbot7)
         {
             int[] xbotIds = { xbot4, xbot5, xbot6, xbot7 };
-            double[] start_x_meters = { 0.297,0.297,0.423,0.423 };
-            double[] start_y_meters = { 0.248, 0.070 ,0.248,0.070 };
+            double[] start_x_meters = { 0.297, 0.297, 0.423, 0.423 };
+            double[] start_y_meters = { 0.248, 0.070, 0.248, 0.070 };
 
-            double[] max_speeds = { 0.15,0.15, 0.15,0.15 };
-            double[] end_speeds = { 0, 0,0,0 };
-            double[] max_acc = { 0.5, 0.5,0.5,0.5 };
+            double[] max_speeds = { 0.15, 0.15, 0.15, 0.15 };
+            double[] end_speeds = { 0, 0, 0, 0 };
+            double[] max_acc = { 0.5, 0.5, 0.5, 0.5 };
 
             _xbotCommand.SyncMotionSI(4, xbotIds, start_x_meters, start_y_meters, end_speeds, max_speeds, max_acc);
 
@@ -139,7 +135,7 @@ namespace simple_pmc_mover
             _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, -0.05, -0.50, 0, 1, 0.5);
         }
 
-        
+
 
 
     }

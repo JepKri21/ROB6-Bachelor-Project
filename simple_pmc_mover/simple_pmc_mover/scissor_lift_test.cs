@@ -5,14 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace simple_pmc_mover
 {
-    internal class scissor_lift_test
+    internal class scissor_lift_test : Movement
     {
         //this class contains a collection of system commands such as connecting to the PMC, gain mastership, etc.
         private static SystemCommands _systemCommand = new SystemCommands();
         //this class contains a collection of xbot commands, such as discover xbots, mobility control, linear motion, etc.
         private static XBotCommands _xbotCommand = new XBotCommands();
+
+        int selector = 2;
 
         public static int[] GetXbotIds()
         {
@@ -83,8 +86,6 @@ namespace simple_pmc_mover
             _xbotCommand.LinearMotionSI(0, xbotIds[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.5, 0, 2, 10);
             _xbotCommand.LinearMotionSI(0, xbotIds[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.5, 0, 2, 10);
 
-            
-
 
             WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
             time_params.delaySecs = 0.5;
@@ -110,6 +111,94 @@ namespace simple_pmc_mover
             _xbotCommand.LinearMotionSI(0, xbotIds[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.5, 0, 2, 10);
 
             
+        }
+
+        public int setSelectorOne()
+        {
+            return selector;
+        }
+
+        public void Run_tests(int[] XID)
+        {
+
+
+            selector = 2;
+            int[] xbot_ids = XID;
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Choose Demo by entering the appropriate number: ");
+            Console.WriteLine("0    Return");
+            Console.WriteLine("1    Initial position for tub lift");
+            Console.WriteLine("2    Perform tub lift");
+            Console.WriteLine("3    Perform tub Set");
+            Console.WriteLine("4    Move Xbots out of magazine");
+            Console.WriteLine("5    Move tub into magazine");
+            Console.WriteLine("6    Move tub out from under nest");
+            Console.WriteLine("7    EMPTY");
+            Console.WriteLine("9    EMPTY");
+            
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+
+            switch (keyInfo.KeyChar)
+            {
+                case '0':
+                    selector = 1;   
+                    break;
+                case '1':
+                    //initial position for the tub pick up
+                    initialPosition(xbot_ids[4], xbot_ids[5], xbot_ids[6], xbot_ids[7]);
+
+                    break;
+                case '2':
+                    // perform a tub lift
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+
+                    break;
+                case '3':
+                    //Perform a tub set down
+
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    break;
+                case '4':
+                    // Move the tub out
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    break;
+
+                case '5':
+                    // Move the tub in
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    break;
+
+           
+
+                case '6':
+                    //move tub part ways out from under the nest to lift the tub back up into the mag
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
+                    break;
+                case '8':
+                    for (int i = 0; i < 20; i++)
+                    {
+                        execute();
+                        Drive();
+                    }
+                    break;
+                case '9':
+                    
+
+                    break;
+
+                case '\u001b': //escape key
+                    return; //exit the program
+
+                
+            }
 
 
 
