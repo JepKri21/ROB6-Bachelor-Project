@@ -227,7 +227,7 @@ namespace simple_pmc_mover
         public void runGearLiftTests(int[] XID)
         {
             selector = 3;
-
+            Console.Clear();
             Console.WriteLine(" Gear Lift tests");
             Console.WriteLine("0    Return ");
             Console.WriteLine("1    Reconnect");

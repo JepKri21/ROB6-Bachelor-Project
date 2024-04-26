@@ -153,26 +153,26 @@ namespace simple_pmc_mover
                     break;
                 case '2':
                     // perform a tub lift
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
-                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
 
                     break;
                 case '3':
                     //Perform a tub set down
 
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
-                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.02, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
                     break;
                 case '4':
                     // Move the tub out
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.52, Movement.DIRECTION.Y, 0.15, 0.5);
-                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
                     break;
 
                 case '5':
                     // Move the tub in
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.52, Movement.DIRECTION.Y, 0.15, 0.5);
-                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.52, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
                     break;
 
            

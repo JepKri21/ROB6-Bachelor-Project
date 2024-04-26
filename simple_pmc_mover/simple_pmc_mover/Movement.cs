@@ -99,8 +99,8 @@ namespace simple_pmc_mover
         public void initialPosition(int xbot4, int xbot5, int xbot6, int xbot7)
         {
             int[] xbotIds = { xbot4, xbot5, xbot6, xbot7 };
-            double[] start_x_meters = { 0.297, 0.297, 0.423, 0.423 };
-            double[] start_y_meters = { 0.248, 0.070, 0.248, 0.070 };
+            double[] start_x_meters = { 0.295, 0.295, 0.425, 0.425 };
+            double[] start_y_meters = { 0.252, 0.073, 0.252, 0.073 };
 
             double[] max_speeds = { 0.15, 0.15, 0.15, 0.15 };
             double[] end_speeds = { 0, 0, 0, 0 };
