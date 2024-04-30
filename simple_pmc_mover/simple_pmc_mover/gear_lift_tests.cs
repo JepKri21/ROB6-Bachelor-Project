@@ -56,22 +56,26 @@ namespace simple_pmc_mover
         }
 
         // this function is simply for repeatability
-        public void MoveDown()
+        public void PerformTest()
         {
             WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
-            time_params.delaySecs = 5;
-            _xbotCommand.LinearMotionSI(0, 1, POSITIONMODE.RELATIVE, 0, -0.204, 0, 0, 0.0025, 0.005);
-            _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, 0.204, 0, 0, 0.0025, 0.005);
+            time_params.delaySecs = 0;
+            _xbotCommand.LinearMotionSI(0, 1, POSITIONMODE.RELATIVE, 0, -0.2355+0.06, 0, 0, 1, 1);
+            _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, 0.2355-0.06, 0, 0, 1, 1);
 
             _xbotCommand.WaitUntil(0, 1, TRIGGERSOURCE.TIME_DELAY, time_params);
             _xbotCommand.WaitUntil(0, 2, TRIGGERSOURCE.TIME_DELAY, time_params);
 
+            _xbotCommand.LinearMotionSI(0, 1, POSITIONMODE.RELATIVE, 0, 0.2355-0.06, 0, 0, 1, 1);
+            _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, -0.2355+0.06, 0, 0, 1, 1);
+
         }
 
-        public void InitialPosition(int xbot_count,int[] xbotIds)
+        public void InitialPosition(int xbot_count,int xbot_1, int xbot_2)
         {
-            double[] start_x_meters = { 0.297, 0.420,0.297,0.420};
-            double[] start_y_meters = { 0.725, 0.725,0.593,0.593 };
+            int[]  xbotIds = {1, 2};
+            double[] start_x_meters = { 0.295, 0.418 };
+            double[] start_y_meters = { 0.717, 0.717};
 
             double[] max_speeds = { 0.15, 0.15};
             double[] end_speeds = { 0, 0 };
@@ -133,10 +137,10 @@ namespace simple_pmc_mover
 
             _xbotCommand.RunMotionMacro(0, precision_macro_xy1, xbotIdArray[0]);
             _xbotCommand.RunMotionMacro(0, precision_macro_xy1, xbotIdArray[1]);
-            MoveDown();
+            
             _xbotCommand.RunMotionMacro(0, precision_macro_xy2, xbotIdArray[0]);
             _xbotCommand.RunMotionMacro(0, precision_macro_xy2, xbotIdArray[1]);
-            MoveDown();
+            
 
         }
 
@@ -232,7 +236,7 @@ namespace simple_pmc_mover
             Console.WriteLine("0    Return ");
             Console.WriteLine("1    Reconnect");
             Console.WriteLine("2    initial position");
-            Console.WriteLine("3    move out");
+            Console.WriteLine("3    Perform test");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
             int[] ids = { 1, 2, 3, 4 };
             switch (keyInfo.KeyChar)
@@ -248,11 +252,10 @@ namespace simple_pmc_mover
                     break;
                 case '2':
                     //Move the xbots further apart
-                    int[] ids2 = { 1, 2 };
-                    InitialPosition(4, ids);
+                    InitialPosition(2, 1, 2);
                     break;
                 case '3':
-                    move_xbot_out(ids);
+                    PerformTest();
                     break;
                 case '4':
                     move_xbot_in(ids);

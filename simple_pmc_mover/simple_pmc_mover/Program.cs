@@ -132,7 +132,11 @@ ____________________________________________________________________| ";
 
                 while (selector == 4)
                 {
-                    SystemTests.runSystemTests(xbot_ids);
+                    
+                    
+                        SystemTests.runSystemTests(xbot_ids);
+                    
+
                     selector = SystemTests.setSelectorOne();
 
                 }
