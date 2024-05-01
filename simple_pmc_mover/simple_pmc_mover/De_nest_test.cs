@@ -94,20 +94,48 @@ namespace simple_pmc_mover
 
                 case '8':
                     selector = 5;
-                    double[] pos_unit_carrier_initial = { 0.120, 0.600 };
-                    _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, pos_unit_carrier_initial[0], pos_unit_carrier_initial[1], 0, 0.1, 0.1);
-                    _xbotCommand.ShortAxesMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, SHORTAXESCENTERMODE.XBOT_CENTER, 0, 0, 0.001, 0, 0, 0, 0.01, 0, 0, 5);
+                    double[] pos_unit_carrier_initial1 = { 0.120, 0.120 };
+                    _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, pos_unit_carrier_initial1[0], pos_unit_carrier_initial1[1], 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(0, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 0, 5, 1);
+                    _xbotCommand.LinearMotionSI(2, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.480, 0, 0.1, 0.1);
+                    //_xbotCommand.ShortAxesMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, SHORTAXESCENTERMODE.XBOT_CENTER, 0, 0, 0.001, 0, 0, 0, 0.01, 0, 0, 5);
 
 
 
                     break;
                 case '9':
-                    selector = 5;
-                    double[] pos_unit_carrier_initial1 = { 0.120, 0.600 };
-                    _xbotCommand.RotaryMotionP2P(0, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 1.570, 0.1, 0.1);
-                    
-                    //_xbotCommand.ShortAxesMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, SHORTAXESCENTERMODE.XBOT_CENTER,0,0,0.001,0,0, 0.1600, 0.01,0,0,10);
+                    WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
 
+                    selector = 5;
+                    //_xbotCommand.RotaryMotionP2P(0, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 1.570, 5, 2, POSITIONMODE.RELATIVE);
+                    double[] pos_unit_carrier_initial = { 0.120, 0.600 };
+                    _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, pos_unit_carrier_initial[0], pos_unit_carrier_initial[1], 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(1, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 1.5707, 5, 2);
+
+                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params.triggerXbotID = xbot_ids[7];
+                    CMD_params.triggerCmdLabel = 1;
+
+                    _xbotCommand.WaitUntil(4, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
+                    _xbotCommand.LinearMotionSI(2, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.120, 0, 0.1, 0.1);
+                    
+                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params.triggerXbotID = xbot_ids[4];
+                    CMD_params.triggerCmdLabel = 2;
+
+                    _xbotCommand.WaitUntil(4, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
+                    _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.120, 0.120, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(2, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 0, 5, 1);
+
+                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params.triggerXbotID = xbot_ids[7];
+                    CMD_params.triggerCmdLabel = 2;
+
+                    _xbotCommand.WaitUntil(4, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
+                    _xbotCommand.LinearMotionSI(2, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.480, 0, 0.1, 0.1);
 
                     break;
             }
