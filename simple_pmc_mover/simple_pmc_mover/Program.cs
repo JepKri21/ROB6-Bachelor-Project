@@ -86,6 +86,7 @@ ____________________________________________________________________| ";
                     Console.WriteLine("1    Scissor lift tests");
                     Console.WriteLine("2    Gear Lift tests ");
                     Console.WriteLine("3    System tests");
+                    Console.WriteLine("4    De-nest test");
                     Console.WriteLine("ESC: Exit program");
                     ConsoleKeyInfo keyinfo = Console.ReadKey();
 
@@ -105,6 +106,9 @@ ____________________________________________________________________| ";
 
                         case '3':
                             selector = 4;
+                            break;
+                        case '4':
+                            selector = 5;
                             break;
                       
                         case '\u001b': //escape key
@@ -141,6 +145,10 @@ ____________________________________________________________________| ";
 
                 }
 
+                while (selector == 5)
+                {
+
+                }
 
 
             } while (true);

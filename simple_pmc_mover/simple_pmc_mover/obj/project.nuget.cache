@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fAaIJan7/LwUb7QIynGE7xSZGFIRYVYwwb5lcUJGLPaCGP1kGF1S4UtsMkWNFbdLYDi0wTHxB+KfGeAB4AMS6A==",
+  "dgSpecHash": "KL3qnaRLTE1ek9tSPEtM5OBu4xLlrwN630RuLrxHgk8/0LCSr5ICcbZIczx3UyiYg7spCrvYjZoiONQTCMfvrg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\chris\\Documents\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\chris\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
-    "C:\\Users\\chris\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
-    "C:\\Users\\chris\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",
-    "C:\\Users\\chris\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.29\\microsoft.netcore.app.host.win-x64.6.0.29.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\astri\\OneDrive\\Dokumenter\\GitHub\\Acopos\\simple_pmc_mover\\simple_pmc_mover\\simple_pmc_mover.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
