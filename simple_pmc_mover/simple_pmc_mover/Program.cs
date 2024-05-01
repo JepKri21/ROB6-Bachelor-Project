@@ -12,6 +12,7 @@ namespace simple_pmc_mover
         private gear_lift_tests gearTest = new gear_lift_tests();
         private scissor_lift_test scissorTest = new scissor_lift_test();
         private System_tests SystemTests = new System_tests();
+        private De_nest_test deNestTest = new De_nest_test();
 
 
         private static XBotCommands _xbotCommand = new XBotCommands();
@@ -147,6 +148,8 @@ ____________________________________________________________________| ";
 
                 while (selector == 5)
                 {
+                    deNestTest.runDeNestTest(xbot_ids);
+                    selector = deNestTest.setSelectorOne();
 
                 }
 
