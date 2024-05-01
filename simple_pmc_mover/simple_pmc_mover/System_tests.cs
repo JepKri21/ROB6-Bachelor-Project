@@ -73,27 +73,27 @@ namespace simple_pmc_mover
 
                 case '4':
                     //Lift the nest
-                    MoveOpposite(xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.005, 0.01);
-                    MoveOpposite(xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.005, 0.01);
+                    MoveOpposite(0,xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.005, 0.01);
+                    MoveOpposite(0, xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.005, 0.01);
 
 
                     break;
                 case '5':
                     //Lower the nest
-                    MoveOpposite(xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.005, 0.01);
-                    MoveOpposite(xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.005, 0.01);
+                    MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.005, 0.01);
+                    MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.005, 0.01);
                     break;
 
                 case '6':
                     // move together denester together
-                    MoveOpposite(xbot_ids[2], xbot_ids[0], 0.01, Movement.DIRECTION.X, 0.01, 0.01);
-                    MoveOpposite(xbot_ids[3], xbot_ids[1], 0.01, Movement.DIRECTION.X, 0.01, 0.01);
+                    MoveOpposite(0,xbot_ids[2], xbot_ids[0], 0.01, Movement.DIRECTION.X, 0.01, 0.01);
+                    MoveOpposite(0,xbot_ids[3], xbot_ids[1], 0.01, Movement.DIRECTION.X, 0.01, 0.01);
                     break;
 
                 case '7':
                     // move denester appart
-                    MoveOpposite(xbot_ids[2], xbot_ids[0], -0.01, Movement.DIRECTION.X, 0.01, 0.01);
-                    MoveOpposite(xbot_ids[3], xbot_ids[1], -0.01, Movement.DIRECTION.X, 0.01, 0.01);
+                    MoveOpposite(0, xbot_ids[2], xbot_ids[0], -0.01, Movement.DIRECTION.X, 0.01, 0.01);
+                    MoveOpposite(0, xbot_ids[3], xbot_ids[1], -0.01, Movement.DIRECTION.X, 0.01, 0.01);
                     break;
 
                 case '2':
@@ -115,12 +115,12 @@ namespace simple_pmc_mover
                         */
 
                         // Lift the tub out of nest
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.01, 0.01);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.01, 0.01);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.01, 0.01);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.01, 0.01);
 
                         // Move tub to the denester
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
 
                         // We now have to wait for all of these motions in order to sync up the gear lifts
                         time_params.delaySecs = time;
@@ -132,16 +132,16 @@ namespace simple_pmc_mover
 
                         time = 0;
                         // Lower the hooks
-                        time += MoveOpposite(xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
-                        MoveOpposite(xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        time += MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
 
                         // Grasp the nest
-                        time += MoveOpposite(xbot_ids[2], xbot_ids[0], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
-                        MoveOpposite(xbot_ids[3], xbot_ids[1], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        time += MoveOpposite(0, xbot_ids[2], xbot_ids[0], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        MoveOpposite(0, xbot_ids[3], xbot_ids[1], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
 
                         // Lift the nest
-                        MoveOpposite(xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.01, 0.01);
-                        time += MoveOpposite(xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.01, 0.01);
+                        MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.01, 0.01);
+                        time += MoveOpposite(0, xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.01, 0.01);
 
 
 
@@ -166,33 +166,33 @@ namespace simple_pmc_mover
                         //------------ GEAR LIFT IS NOW CARRYING THE NEST ---------------//
 
                         // Scissor Lift lowers
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
 
                         // ScissorLift moves  out of range for nest
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
 
                         // Scissor lifts the tub
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.05, 0.1);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.05, 0.1);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.05, 0.1);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.05, 0.1);
 
 
                         // Scissor lift moves fully back
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
 
                         // Scissor lift places the tub
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.1);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.1);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.1);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.1);
 
                         // Scissor lift moves under the hanging nest
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
 
                         // Scissor lift seperates
-                        time += MoveOpposite(xbot_ids[6], xbot_ids[4], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
-                        MoveOpposite(xbot_ids[7], xbot_ids[5], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
+                        time += MoveOpposite(0, xbot_ids[6], xbot_ids[4], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
+                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
 
                         // homemade delay function as the wait untill command does not work for landed
                         XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
@@ -213,8 +213,8 @@ namespace simple_pmc_mover
                         time = 0;
 
                         //lift the scissor up again
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.005);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.005);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.005);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.005);
                         time_params.delaySecs = time;
                         _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.TIME_DELAY, time_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.TIME_DELAY, time_params);
@@ -222,8 +222,8 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.TIME_DELAY, time_params);
 
                         //Lower the gear
-                        time_gear = MoveOpposite(xbot_ids[0], xbot_ids[1], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
-                        MoveOpposite(xbot_ids[2], xbot_ids[3], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        time_gear = MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
 
                         time_params.delaySecs = time_gear + 0.5;
                         _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.TIME_DELAY, time_params);
@@ -236,8 +236,8 @@ namespace simple_pmc_mover
                         time_gear = 0;
 
                         //grasp the nest with the scissor
-                        time += MoveOpposite(xbot_ids[6], xbot_ids[4], 0.005, Movement.DIRECTION.X, 0.01, 0.01) + 0.5;
-                        MoveOpposite(xbot_ids[7], xbot_ids[5], 0.005, Movement.DIRECTION.X, 0.01, 0.01);
+                        time += MoveOpposite(0, xbot_ids[6], xbot_ids[4], 0.005, Movement.DIRECTION.X, 0.01, 0.01) + 0.5;
+                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], 0.005, Movement.DIRECTION.X, 0.01, 0.01);
 
 
 
@@ -248,12 +248,12 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.TIME_DELAY, time_params);
                         time = 0;
                         //gear lift release
-                        time_gear += MoveOpposite(xbot_ids[2], xbot_ids[0], -0.008, Movement.DIRECTION.X, unloaded_gearlift_speed, 0.1);
-                        MoveOpposite(xbot_ids[3], xbot_ids[1], -0.008, Movement.DIRECTION.X, unloaded_gearlift_speed, 0.1);
+                        time_gear += MoveOpposite(0, xbot_ids[2], xbot_ids[0], -0.008, Movement.DIRECTION.X, unloaded_gearlift_speed, 0.1);
+                        MoveOpposite(0, xbot_ids[3], xbot_ids[1], -0.008, Movement.DIRECTION.X, unloaded_gearlift_speed, 0.1);
 
                         //raise the gear 
-                        time_gear += MoveOpposite(xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.1, 0.1);
-                        MoveOpposite(xbot_ids[2], xbot_ids[3], 0.140, Movement.DIRECTION.Y, 0.1, 0.1);
+                        time_gear += MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.1, 0.1);
+                        MoveOpposite(0, xbot_ids[2], xbot_ids[3], 0.140, Movement.DIRECTION.Y, 0.1, 0.1);
 
                         // wait for the gear to lift
                         time_params.delaySecs = time_gear;
@@ -267,12 +267,12 @@ namespace simple_pmc_mover
                         //------------------- NEST PLACED IN SCISSOR LIFT -----------------------------//
 
                         // The nest out into open space
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
 
                         // move the nest back under the gear lift
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
 
                         //make the gear lifts wait for the scissor lift
 
@@ -284,13 +284,13 @@ namespace simple_pmc_mover
                         time = 0;
 
                         // lower the gear lift
-                        time_gear = MoveOpposite(xbot_ids[0], xbot_ids[1], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
-                        MoveOpposite(xbot_ids[2], xbot_ids[3], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        time_gear = MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
+                        MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
 
 
                         // Grasp the nest
-                        time_gear += MoveOpposite(xbot_ids[2], xbot_ids[0], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
-                        MoveOpposite(xbot_ids[3], xbot_ids[1], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        time_gear += MoveOpposite(0, xbot_ids[2], xbot_ids[0], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        MoveOpposite(0, xbot_ids[3], xbot_ids[1], 0.008, Movement.DIRECTION.X, 0.01, 0.01);
 
                         time_params.delaySecs = time_gear - 1;
                         _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.TIME_DELAY, time_params);
@@ -300,8 +300,8 @@ namespace simple_pmc_mover
                         time_gear = 0;
 
                         // release the nest from the scissor lift
-                        time += MoveOpposite(xbot_ids[6], xbot_ids[4], -0.005, Movement.DIRECTION.X, 0.01, 0.01);
-                        MoveOpposite(xbot_ids[7], xbot_ids[5], -0.005, Movement.DIRECTION.X, 0.01, 0.01);
+                        time += MoveOpposite(0, xbot_ids[6], xbot_ids[4], -0.005, Movement.DIRECTION.X, 0.01, 0.01);
+                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], -0.005, Movement.DIRECTION.X, 0.01, 0.01);
 
                         time_params.delaySecs = time + 1;
                         _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.TIME_DELAY, time_params);
@@ -312,8 +312,8 @@ namespace simple_pmc_mover
 
                         //--------------------------------ERRORS HAPPEn HERE------------------//
                         // Lift the nest
-                        MoveOpposite(xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
-                        time_gear += MoveOpposite(xbot_ids[2], xbot_ids[3], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
+                        MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
+                        time_gear += MoveOpposite(0, xbot_ids[2], xbot_ids[3], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
                         _xbotCommand.LevitationCommand(xbot_ids[0], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[1], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LAND);
@@ -327,8 +327,8 @@ namespace simple_pmc_mover
                         time_gear = 0;
 
                         //lower the scissor lift
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 5, 1);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 5, 1);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], 0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 5, 1);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 5, 1);
 
                         //------------------------------ERRORS END HERE --------------------------//
 
@@ -341,8 +341,8 @@ namespace simple_pmc_mover
                         time = 0;
 
                         // the scissor lifts moves closer to prepare for a tub lift
-                        time += MoveOpposite(xbot_ids[6], xbot_ids[4], 0.06, Movement.DIRECTION.X, unloaded_gearlift_speed * 5, 1);
-                        MoveOpposite(xbot_ids[7], xbot_ids[5], 0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed * 5, 1);
+                        time += MoveOpposite(0, xbot_ids[6], xbot_ids[4], 0.06, Movement.DIRECTION.X, unloaded_gearlift_speed * 5, 1);
+                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], 0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed * 5, 1);
 
                         // move the scissor lift under the tub
                         _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, 0, 0.295, 0.252, 0, 1, 2);
@@ -352,24 +352,24 @@ namespace simple_pmc_mover
                         time += temp.TravelTimeSecs;
 
                         // Lift the tub out of magazine
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
                         // Move tub out of magazine
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
 
                         // lower the tub to pass under the syringes
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
                         // move all the way under the denester
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
 
                         // Lift the tub out of nest
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
-                        MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
 
                         status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
@@ -394,16 +394,16 @@ namespace simple_pmc_mover
                         time = 0;
                         */
                         // lower the nest back into the tub
-                        time_gear += MoveOpposite(xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
-                        MoveOpposite(xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
+                        time_gear += MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
+                        MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
 
                         // Release the nest
-                        time_gear += MoveOpposite(xbot_ids[2], xbot_ids[0], -0.008, Movement.DIRECTION.X, 0.01, 0.01);
-                        time_gear += MoveOpposite(xbot_ids[3], xbot_ids[1], -0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        time_gear += MoveOpposite(0, xbot_ids[2], xbot_ids[0], -0.008, Movement.DIRECTION.X, 0.01, 0.01);
+                        time_gear += MoveOpposite(0, xbot_ids[3], xbot_ids[1], -0.008, Movement.DIRECTION.X, 0.01, 0.01);
 
                         // Raise the gear lifts again
-                        time_gear += MoveOpposite(xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.1, 0.3);
-                        time_gear += MoveOpposite(xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.1, 0.3);
+                        time_gear += MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.1, 0.3);
+                        time_gear += MoveOpposite(0, xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, 0.1, 0.3);
 
 
                         //scissor lift waits for the gear lift
@@ -418,8 +418,8 @@ namespace simple_pmc_mover
 
 
                         // Scissor lift moves fully back
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                        time += MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
 
                         // Scissor lift places the tub
                         
@@ -431,8 +431,8 @@ namespace simple_pmc_mover
                         
 
                         CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-                        time_params.triggerXbotID = xbot_ids[3];
-                        time_params.triggerCmdLabel = 3;
+                        CMD_params.triggerXbotID = xbot_ids[3];
+                        CMD_params.triggerCmdLabel = 3;
 
                         time_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                         time_params.triggerXbotID = xbot_ids[7];

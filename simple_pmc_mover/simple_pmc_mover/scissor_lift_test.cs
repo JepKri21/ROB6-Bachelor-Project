@@ -148,7 +148,7 @@ namespace simple_pmc_mover
                     break;
                 case '1':
                     //initial position for the tub pick up
-                    initialPosition(xbot_ids[4], xbot_ids[5], xbot_ids[6], xbot_ids[7]);
+                    initialPosition(4, xbot_ids[4], xbot_ids[5], xbot_ids[6], xbot_ids[7]);
 
                     break;
                 case '2':
