@@ -60,21 +60,21 @@ namespace simple_pmc_mover
         {
             WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
             time_params.delaySecs = 0;
-            _xbotCommand.LinearMotionSI(0, 1, POSITIONMODE.RELATIVE, 0, -0.2355+0.06, 0, 0, 1, 1);
-            _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, 0.2355-0.06, 0, 0, 1, 1);
+            _xbotCommand.LinearMotionSI(0, 4, POSITIONMODE.RELATIVE, 0, -0.175, 0, 0, 0.015, 0.05);
+            _xbotCommand.LinearMotionSI(0, 3, POSITIONMODE.RELATIVE, 0, 0.175, 0, 0, 0.015, 0.05);
 
-            _xbotCommand.WaitUntil(0, 1, TRIGGERSOURCE.TIME_DELAY, time_params);
-            _xbotCommand.WaitUntil(0, 2, TRIGGERSOURCE.TIME_DELAY, time_params);
+            _xbotCommand.WaitUntil(0, 4, TRIGGERSOURCE.TIME_DELAY, time_params);
+            _xbotCommand.WaitUntil(0, 3, TRIGGERSOURCE.TIME_DELAY, time_params);
 
-            _xbotCommand.LinearMotionSI(0, 1, POSITIONMODE.RELATIVE, 0, 0.2355-0.06, 0, 0, 1, 1);
-            _xbotCommand.LinearMotionSI(0, 2, POSITIONMODE.RELATIVE, 0, -0.2355+0.06, 0, 0, 1, 1);
+            _xbotCommand.LinearMotionSI(0, 4, POSITIONMODE.RELATIVE, 0, 0.175, 0, 0, 0.015, 0.05);
+            _xbotCommand.LinearMotionSI(0, 3, POSITIONMODE.RELATIVE, 0, -0.175, 0, 0, 0.015, 0.05);
 
         }
 
         public void InitialPosition(int xbot_count,int xbot_1, int xbot_2)
         {
-            int[]  xbotIds = {1, 2};
-            double[] start_x_meters = { 0.295, 0.418 };
+            int[]  xbotIds = {4, 3};
+            double[] start_x_meters = { 0.295, 0.420 };
             double[] start_y_meters = { 0.717, 0.717};
 
             double[] max_speeds = { 0.15, 0.15};
