@@ -13,6 +13,7 @@ namespace simple_pmc_mover
         private scissor_lift_test scissorTest = new scissor_lift_test();
         private System_tests SystemTests = new System_tests();
         private De_nest_test deNestTest = new De_nest_test();
+        private De_tubbing_with_bar deTubbingWithBar = new De_tubbing_with_bar();
 
 
         private static XBotCommands _xbotCommand = new XBotCommands();
@@ -28,7 +29,7 @@ namespace simple_pmc_mover
                   |_|                                               |
 ____________________________________________________________________| ";
 
-        int[] xbot_ids;
+        int[] xbot_ids = { 4, 3, 2, 1, 5, 3, 6, 5,5};
 
        
 
@@ -48,12 +49,17 @@ ____________________________________________________________________| ";
             Console.WriteLine("Not that right to left refers to their position in the PM tool");
             Console.WriteLine("");
             XBotIDs tempId = _xbotCommand.GetXBotIDS();
+
+
+            
+
+            /*
             xbot_ids = new int[8];
             for (int i = 0; i < xbot_ids.Length; i++)
             {
                 xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
             }
-
+            */
         }
 
         public void Run()
@@ -73,6 +79,7 @@ ____________________________________________________________________| ";
                     CONNECTIONSTATUS status = connectionHandler.ConnectAndGainMastership();
                     Console.WriteLine(status);
                     xbotCalibration();
+                    
                     selector = 1;
 
 
@@ -88,6 +95,7 @@ ____________________________________________________________________| ";
                     Console.WriteLine("2    Gear Lift tests ");
                     Console.WriteLine("3    System tests");
                     Console.WriteLine("4    De-nest test");
+                    Console.WriteLine("5    De-Tubbing with bar");
                     Console.WriteLine("ESC: Exit program");
                     ConsoleKeyInfo keyinfo = Console.ReadKey();
 
@@ -111,7 +119,10 @@ ____________________________________________________________________| ";
                         case '4':
                             selector = 5;
                             break;
-                      
+                        case '5':
+                            selector = 6;
+                            break;
+
                         case '\u001b': //escape key
                             return;
                         default:
@@ -152,7 +163,18 @@ ____________________________________________________________________| ";
                     selector = deNestTest.setSelectorOne();
 
                 }
+                while (selector == 6)
+                {
+                    deTubbingWithBar.runDeTubbingWithBar(xbot_ids);
+                    selector = deTubbingWithBar.setSelectorOne();
 
+                }
+                while (selector == 60)
+                {
+                    deTubbingWithBar.runDeTubbingWithBarStepByStep(xbot_ids);
+                    selector = deTubbingWithBar.setSelectorOne();
+
+                }
 
             } while (true);
         }
