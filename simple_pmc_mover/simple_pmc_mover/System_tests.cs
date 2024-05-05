@@ -97,10 +97,9 @@ namespace simple_pmc_mover
                     break;
 
                 case '2':
-                    //WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
+                    
                     WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
-                    double time = 0;
-                    double time_gear = 0;
+                    
                     for (int i = 0; i < 10; i++)
                     {
                         // full Demo
@@ -108,11 +107,7 @@ namespace simple_pmc_mover
                         // Initial position commands
                         Console.WriteLine("we begin baby");
 
-                        /*
-                        for (int j = 1; j < 9; j++) {
-                            _xbotCommand.MotionBufferControl(j, MOTIONBUFFEROPTIONS.CLEARBUFFER);
-                        }
-                        */
+                        
 
                         // Lift the tub out of nest
                         MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.01, 0.01);
@@ -131,15 +126,7 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-
-                        /*
-                        _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        */
-                        //time = 0;
+                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);                       
 
 
                         // Lower the hooks
@@ -162,17 +149,8 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[5], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[6], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-
+                        _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);                       
                         
-                        /*
-                        time_params.delaySecs = time;                        
-                        _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[5], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[6], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        time = 0;
-                        */
 
                         // the gear lift lands
                         _xbotCommand.LevitationCommand(xbot_ids[0], LEVITATEOPTIONS.LAND);
@@ -366,16 +344,7 @@ namespace simple_pmc_mover
                         MoveRelativeTogether(1, xbot_ids[5], xbot_ids[7], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 5, 1);
 
                         //------------------------------ERRORS END HERE --------------------------//
-                        /*
-                        CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-                        CMD_params.triggerXbotID = xbot_ids[5];
-                        CMD_params.triggerCmdLabel = 1;
-
-                        _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        */
+                        
                         // the scissor lifts moves closer to prepare for a tub lift
                         MoveOpposite(0, xbot_ids[6], xbot_ids[4], 0.06, Movement.DIRECTION.X, unloaded_gearlift_speed * 5, 1);
                         MoveOpposite(0, xbot_ids[7], xbot_ids[5], 0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed * 5, 1);
@@ -420,15 +389,8 @@ namespace simple_pmc_mover
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LEVITATE);
 
 
-                        //gear lift waits until tub is under the nest
-                        /*
-                        time_params.delaySecs = time;
-                        _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.TIME_DELAY, time_params);
-                        time = 0;
-                        */
+                        
+                        
                         // lower the nest back into the tub
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
                         MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
@@ -453,8 +415,6 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
 
-
-
                         // Scissor lift moves fully back
                         MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
                         MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
@@ -468,25 +428,7 @@ namespace simple_pmc_mover
 
                         CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                         CMD_params.triggerXbotID = xbot_ids[3];
-                        CMD_params.triggerCmdLabel = 2;
-
-                        /*
-                        time_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-                        time_params.triggerXbotID = xbot_ids[7];
-                        time_params.triggerCmdLabel = 2;
-
-                       
-                        _xbotCommand.WaitUntil(3, xbot_ids[0], TRIGGERSOURCE.CMD_LABEL, time_params);
-                        _xbotCommand.WaitUntil(3, xbot_ids[1], TRIGGERSOURCE.CMD_LABEL, time_params);
-                        _xbotCommand.WaitUntil(3, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, time_params);
-                        _xbotCommand.WaitUntil(3, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, time_params);
-                        
-                        _xbotCommand.WaitUntil(4, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(4, xbot_ids[5], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(4, xbot_ids[6], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        _xbotCommand.WaitUntil(4, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                        
-                       */
+                        CMD_params.triggerCmdLabel = 2;                     
                         
                         
 
@@ -504,11 +446,7 @@ namespace simple_pmc_mover
                         
                         
                     }
-                    //time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                    //MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                    //time += MoveRelativeTogether(xbot_ids[0], xbot_ids[1], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                    //MoveRelativeTogether(xbot_ids[2], xbot_ids[3], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-
+                    
 
                     break;
                 case '\u001b': //escape key
