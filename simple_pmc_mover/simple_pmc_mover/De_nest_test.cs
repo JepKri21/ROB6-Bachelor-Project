@@ -23,6 +23,51 @@ namespace simple_pmc_mover
             selector = 4;
             Console.Clear();
             Console.WriteLine(" System tests");
+            Console.WriteLine("0    Return");
+            Console.WriteLine("1    ");
+            Console.WriteLine("2    Demo");
+            Console.WriteLine("3    Step by step");
+            Console.WriteLine("4    ");
+            Console.WriteLine("5    ");
+            Console.WriteLine("6    ");
+            Console.WriteLine("7    ");
+            Console.WriteLine("8    Rotation program for unit Carrier");
+            Console.WriteLine("9    ");
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            switch (keyInfo.KeyChar)
+            {
+
+                case '0':
+                    selector = 1;
+                    break;
+
+                case '1':
+
+                    break;
+
+                case '2':
+                    //Demo program
+                    break;
+
+                case '3':
+                    selector = 50;
+                    deNestingStepByStep(XID);
+                    break;
+
+                case '8':
+                    selector = 52;
+                    break;
+                
+            }
+        }
+        public void deNestingStepByStep(int[] XID)
+        {
+            
+            int[] xbot_ids = XID;
+            selector = 50;
+            Console.Clear();
+            Console.WriteLine(" De-nesting step by step");
             Console.WriteLine("0    Return ");
             Console.WriteLine("1    Start position for scissor lift");
             Console.WriteLine("2    Grasp nest");
@@ -39,7 +84,7 @@ namespace simple_pmc_mover
             {
 
                 case '0':
-                    selector = 1;
+                    selector = 5;
                     break;
 
                 case '1':
@@ -48,39 +93,34 @@ namespace simple_pmc_mover
                     _xbotCommand.LinearMotionSI(0, XID[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, scissor_inital[0], scissor_inital[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, scissor_inital[2], scissor_inital[3], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, scissor_inital[4], scissor_inital[5], 0, 0.1, 0.1);
-                    _xbotCommand.LinearMotionSI(0, XID[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, scissor_inital[6], scissor_inital[7], 0, 0.1, 0.1);
-                    selector = 5;
+                    _xbotCommand.LinearMotionSI(0, XID[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, scissor_inital[6], scissor_inital[7], 0, 0.1, 0.1);                    
                     break;
 
                 case '2':
                     MoveOpposite(0, XID[2], XID[0], 0.005, Movement.DIRECTION.X, 0.01, 0.01);
-                    MoveOpposite(0, XID[3], XID[1], 0.005, Movement.DIRECTION.X, 0.01, 0.01);
-                    selector = 5;
+                    MoveOpposite(0, XID[3], XID[1], 0.005, Movement.DIRECTION.X, 0.01, 0.01);                    
                     break;
 
                 case '3':
                     double[] linepusher_initial = { 0.525, 0.490 };
                     _xbotCommand.LinearMotionSI(0, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_initial[0], linepusher_initial[1], 0, 0.1, 0.1);
-                    selector = 5;
+                    
                     break;
 
                 case '4':
                     double[] linepusher_end = { 0.525, 0.682 };
                     _xbotCommand.LinearMotionSI(0, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_end[0], linepusher_end[1], 0, 0.1, 0.1);
-                    selector = 5;
                     break;
 
                 case '5':
                     _xbotCommand.LinearMotionSI(0, XID[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[2], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
-                    selector = 5;
                     break;
 
                 case '6':
                     double[] linedenester_initial = { 0.526, 0.410, 0.526, 0.270 };
                     _xbotCommand.LinearMotionSI(0, XID[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_initial[0], linedenester_initial[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[6], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_initial[2], linedenester_initial[3], 0, 0.1, 0.1);
-                    selector = 5;
                     break;
 
                 case '7':
@@ -88,12 +128,10 @@ namespace simple_pmc_mover
                     _xbotCommand.LinearMotionSI(0, XID[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_end[0], linedenester_end[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[6], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_end[2], linedenester_end[3], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, XID[5], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.01, 0, 0.01, 0.01);
-                    selector = 5;
                     break;
 
 
                 case '8':
-                    selector = 5;
                     double[] pos_unit_carrier_initial1 = { 0.120, 0.120 };
                     _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, pos_unit_carrier_initial1[0], pos_unit_carrier_initial1[1], 0, 0.1, 0.1);
                     _xbotCommand.RotaryMotionP2P(0, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 0, 5, 1);
@@ -106,7 +144,6 @@ namespace simple_pmc_mover
                 case '9':
                     WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
 
-                    selector = 5;
                     //_xbotCommand.RotaryMotionP2P(0, XID[7], ROTATIONMODE.WRAP_TO_2PI_CCW, 1.570, 5, 2, POSITIONMODE.RELATIVE);
                     double[] pos_unit_carrier_initial = { 0.120, 0.600 };
                     _xbotCommand.LinearMotionSI(0, XID[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, pos_unit_carrier_initial[0], pos_unit_carrier_initial[1], 0, 0.1, 0.1);
@@ -119,7 +156,7 @@ namespace simple_pmc_mover
                     _xbotCommand.WaitUntil(4, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
                     _xbotCommand.LinearMotionSI(2, XID[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.120, 0, 0.1, 0.1);
-                    
+
                     CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                     CMD_params.triggerXbotID = xbot_ids[4];
                     CMD_params.triggerCmdLabel = 2;

@@ -152,6 +152,12 @@ ____________________________________________________________________| ";
                     selector = deNestTest.setSelectorOne();
 
                 }
+                while (selector == 50)
+                {
+                    deNestTest.deNestingStepByStep(xbot_ids);
+                    selector = deNestTest.setSelectorOne();
+
+                }
 
 
             } while (true);
