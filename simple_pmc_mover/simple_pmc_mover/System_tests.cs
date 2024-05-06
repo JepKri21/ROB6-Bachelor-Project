@@ -101,7 +101,7 @@ namespace simple_pmc_mover
                     WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
                     double time = 0;
                     double time_gear = 0;
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 100; i++)
                     {
                         // full Demo
                         // we assume that we always start after the tubs and gearlifts have been reset using their respective
@@ -356,16 +356,16 @@ namespace simple_pmc_mover
                         MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
                         // Move tub out of magazine
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.2, 0.5);
+                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.240, Movement.DIRECTION.Y, 0.2, 0.5);
+                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.240, Movement.DIRECTION.Y, 0.2, 0.5);
 
                         // lower the tub to pass under the syringes
                         time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
                         MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
                         // move all the way under the denester
-                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
-                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.20, 0.5);
+                        time += MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.250, Movement.DIRECTION.Y, 0.20, 0.5);
+                        MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.250, Movement.DIRECTION.Y, 0.20, 0.5);
 
                         // Lift the tub out of nest
                         time += MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
