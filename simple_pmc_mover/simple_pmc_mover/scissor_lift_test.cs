@@ -130,8 +130,8 @@ namespace simple_pmc_mover
             Console.WriteLine("0    Return");
             Console.WriteLine("1    Initial position for tub lift");
             Console.WriteLine("2    Perform tub lift");
-            Console.WriteLine("3    Perform tub Set");
-            Console.WriteLine("4    Move Xbots out of magazine");
+            Console.WriteLine("3    Start position weight test");
+            Console.WriteLine("4    Perform weight test");
             Console.WriteLine("5    Move tub into magazine");
             Console.WriteLine("6    Move tub out from under nest");
             Console.WriteLine("7    EMPTY");
@@ -148,39 +148,50 @@ namespace simple_pmc_mover
                     break;
                 case '1':
                     //initial position for the tub pick up
-                    initialPosition(xbot_ids[4], xbot_ids[5], xbot_ids[6], xbot_ids[7]);
+                    initialPosition(4, xbot_ids[4], xbot_ids[5], xbot_ids[6], xbot_ids[7]);
 
                     break;
                 case '2':
                     // perform a tub lift
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
-                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    //MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    //MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
 
                     break;
                 case '3':
-                    //Perform a tub set down
+                    // START POSITION FOR weight test
 
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[6], 0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
-                    MoveRelativeTogether(xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, 0.0025, 0.005);
+                    _xbotCommand.LinearMotionSI(0, 4, POSITIONMODE.ABSOLUTE, 0, 0.300, 0.630, 0, 0.015, 0.05);
+                    _xbotCommand.LinearMotionSI(0, 5, POSITIONMODE.ABSOLUTE, 0, 0.450, 0.630, 0, 0.015, 0.05);
+
+
                     break;
                 case '4':
                     // Move the tub out
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
-                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+
+
+                    _xbotCommand.LinearMotionSI(0, 4, POSITIONMODE.RELATIVE, 0, 0.015, 0, 0, 0.015, 0.05);
+                    _xbotCommand.LinearMotionSI(0, 5, POSITIONMODE.RELATIVE, 0, -0.015, 0, 0, 0.015, 0.05);
+
+                    _xbotCommand.LinearMotionSI(0, 4, POSITIONMODE.RELATIVE, 0, -0.015, 0, 0, 0.015, 0.05);
+                    _xbotCommand.LinearMotionSI(0, 5, POSITIONMODE.RELATIVE, 0, 0.015, 0, 0, 0.015, 0.05);
+
+
+                    //MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                    //MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.49, Movement.DIRECTION.Y, 0.15, 0.5);
                     break;
 
                 case '5':
                     // Move the tub in
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
-                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.49, Movement.DIRECTION.Y, 0.15, 0.5);
                     break;
 
            
 
                 case '6':
                     //move tub part ways out from under the nest to lift the tub back up into the mag
-                    MoveRelativeTogether(xbot_ids[4], xbot_ids[5], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
-                    MoveRelativeTogether(xbot_ids[6], xbot_ids[7], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
+                    MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.26, Movement.DIRECTION.Y, 0.15, 0.5);
                     break;
                 case '8':
                     for (int i = 0; i < 20; i++)
