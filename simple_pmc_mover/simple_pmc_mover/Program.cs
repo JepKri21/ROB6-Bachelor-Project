@@ -158,6 +158,11 @@ ____________________________________________________________________| ";
                     selector = deNestTest.setSelectorOne();
 
                 }
+                while (selector == 51)
+                {
+                    deNestTest.unitCarriereRotation(xbot_ids);
+                    selector = deNestTest.setSelectorOne();
+                }
 
 
             } while (true);
