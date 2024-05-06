@@ -28,7 +28,7 @@ namespace simple_pmc_mover
                   |_|                                               |
 ____________________________________________________________________| ";
 
-        int[] xbot_ids;
+        int[] xbot_ids = {2,1,8,7,5,4,3};
 
        
 
@@ -48,11 +48,11 @@ ____________________________________________________________________| ";
             Console.WriteLine("Not that right to left refers to their position in the PM tool");
             Console.WriteLine("");
             XBotIDs tempId = _xbotCommand.GetXBotIDS();
-            xbot_ids = new int[8];
-            for (int i = 0; i < xbot_ids.Length; i++)
-            {
-                xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
-            }
+            //xbot_ids = new int[8];
+           // for (int i = 0; i < xbot_ids.Length; i++)
+            //{
+              //  xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
+            //}
 
         }
 
