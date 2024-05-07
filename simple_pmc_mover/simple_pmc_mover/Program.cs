@@ -28,7 +28,7 @@ namespace simple_pmc_mover
                   |_|                                               |
 ____________________________________________________________________| ";
 
-        int[] xbot_ids = {2,3,8,7,6,4,5};
+        int[] xbot_ids = {3,2,8,7,5,6,4,1};
 
        
 
@@ -161,6 +161,11 @@ ____________________________________________________________________| ";
                 while (selector == 51)
                 {
                     deNestTest.unitCarriereRotation(xbot_ids);
+                    selector = deNestTest.setSelectorOne();
+                }
+                while (selector == 52)
+                {
+                    deNestTest.deNestingDemo(xbot_ids);
                     selector = deNestTest.setSelectorOne();
                 }
 
