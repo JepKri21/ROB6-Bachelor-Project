@@ -13,6 +13,9 @@ namespace simple_pmc_mover
         private scissor_lift_test scissorTest = new scissor_lift_test();
         private System_tests SystemTests = new System_tests();
         private De_nest_test deNestTest = new De_nest_test();
+        private Filling_and_inspection fillingAndInspection = new Filling_and_inspection();
+
+
 
 
         private static XBotCommands _xbotCommand = new XBotCommands();
@@ -28,7 +31,9 @@ namespace simple_pmc_mover
                   |_|                                               |
 ____________________________________________________________________| ";
 
-        int[] xbot_ids;
+        //If ID is always the same use outcommented line
+        int[] xbot_ids = {7,8,2,6,1,3,9,9};
+        //int[] xbot_ids;
 
        
 
@@ -48,11 +53,11 @@ ____________________________________________________________________| ";
             Console.WriteLine("Not that right to left refers to their position in the PM tool");
             Console.WriteLine("");
             XBotIDs tempId = _xbotCommand.GetXBotIDS();
-            xbot_ids = new int[8];
-            for (int i = 0; i < xbot_ids.Length; i++)
-            {
-                xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
-            }
+            //xbot_ids = new int[8];
+            //for (int i = 0; i < xbot_ids.Length; i++)
+            //{
+            //    xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
+            //}
 
         }
 
@@ -88,6 +93,7 @@ ____________________________________________________________________| ";
                     Console.WriteLine("2    Gear Lift tests ");
                     Console.WriteLine("3    System tests");
                     Console.WriteLine("4    De-nest test");
+                    Console.WriteLine("7    Filling And Inspection");
                     Console.WriteLine("ESC: Exit program");
                     ConsoleKeyInfo keyinfo = Console.ReadKey();
 
@@ -111,7 +117,11 @@ ____________________________________________________________________| ";
                         case '4':
                             selector = 5;
                             break;
-                      
+
+                        case '7':
+                            selector = 7;
+                            break;
+
                         case '\u001b': //escape key
                             return;
                         default:
@@ -150,6 +160,12 @@ ____________________________________________________________________| ";
                 {
                     deNestTest.runDeNestTest(xbot_ids);
                     selector = deNestTest.setSelectorOne();
+
+                }
+                while (selector == 7)
+                {
+                    fillingAndInspection.runFillingAndInspection(xbot_ids);
+                    selector = fillingAndInspection.setSelectorOne();
 
                 }
 
