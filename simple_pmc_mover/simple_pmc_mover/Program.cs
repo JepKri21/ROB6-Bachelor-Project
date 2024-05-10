@@ -15,6 +15,9 @@ namespace simple_pmc_mover
         private De_nest_test deNestTest = new De_nest_test();
         private De_tubbing_with_bar deTubbingWithBar = new De_tubbing_with_bar();
         private capping capper = new capping();
+        private Filling_and_inspection fillingAndInspection = new Filling_and_inspection();
+
+
 
 
         private static XBotCommands _xbotCommand = new XBotCommands();
@@ -30,7 +33,9 @@ namespace simple_pmc_mover
                   |_|                                               |
 ____________________________________________________________________| ";
 
-        int[] xbot_ids = { 4, 3, 2, 1, 5, 3, 6, 5,5};
+        //If ID is always the same use outcommented line
+        int[] xbot_ids = {1,4,6,2,3,5,9,9};
+        //int[] xbot_ids;
 
        
 
@@ -103,6 +108,7 @@ ____________________________________________________________________| ";
                     Console.WriteLine("3    System tests");
                     Console.WriteLine("4    De-nest test");
                     Console.WriteLine("5    De-Tubbing with bar");
+                    Console.WriteLine("7    Filling And Inspection");
                     Console.WriteLine("ESC: Exit program");
                     ConsoleKeyInfo keyinfo = Console.ReadKey();
 
@@ -128,6 +134,11 @@ ____________________________________________________________________| ";
                             break;
                         case '5':
                             selector = 6;
+                            break;
+
+
+                        case '7':
+                            selector = 7;
                             break;
 
                         case '\u001b': //escape key
@@ -174,6 +185,12 @@ ____________________________________________________________________| ";
                 {
                     deNestTest.deNestingStepByStep(xbot_ids);
                     selector = deNestTest.setSelectorOne();
+                while (selector == 7)
+                {
+                    fillingAndInspection.runFillingAndInspection(xbot_ids);
+                    selector = fillingAndInspection.setSelectorOne();
+
+                }
 
                 }
                 while (selector == 51)
