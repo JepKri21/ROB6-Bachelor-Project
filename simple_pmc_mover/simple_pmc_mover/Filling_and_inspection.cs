@@ -15,6 +15,7 @@ namespace simple_pmc_mover
 
         int selector = 7;
         double[] intialPosUnitCarrier = { 0.600, 0.600, 0.600, 0.360, 0.600, 0.120 };
+        double[] intialPosSecondUnitCarrier = { 0.600, 0.120 };
         double[] intialPosFilling = { 0.295, 0.840, 0.425, 0.840 };
         double[] intialPosUnitWeighing = { 0.650, 0.840 };
         double[] intialPosUnitVisual = { 0.360, 0.360 };
@@ -53,7 +54,7 @@ namespace simple_pmc_mover
             _xbotCommand.WaitUntil(0, carrierModuleID, TRIGGERSOURCE.CMD_LABEL, wait_params);
 
             _xbotCommand.LinearMotionSI(0, carrierModuleID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.360, 0.600, 0, 0.1, 0.1);
-            _xbotCommand.RotaryMotionP2P(2, carrierModuleID, ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 1, 2, POSITIONMODE.RELATIVE);
+            _xbotCommand.RotaryMotionP2P(2, carrierModuleID, ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
 
             CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
             CMD_params.triggerXbotID = carrierModuleID;
@@ -411,7 +412,15 @@ namespace simple_pmc_mover
                             
                             _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.TIME_DELAY, time_params);
                             Console.WriteLine("sanity");
-                            _xbotCommand.LinearMotionSI(40, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
+                            
+                            if (y == 5)
+                            {
+                                _xbotCommand.LinearMotionSI(50, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
+                            }
+                            else
+                            {
+                                _xbotCommand.LinearMotionSI(40, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
+                            }
                         }
                         else
                         {
@@ -435,7 +444,34 @@ namespace simple_pmc_mover
             }
         }
 
-        public void changeUnitCarrier(int filledUnitCarrier, int emptyUnitCarrier, int[] xbot_ids)
+        public void carrierToPosition(int carrierID, int[] xbot_ids, int position)
+        {
+            WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
+
+            CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+            CMD_params.triggerXbotID = xbot_ids[3];
+            CMD_params.triggerCmdLabel = 50;
+
+            _xbotCommand.WaitUntil(0, carrierID, TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
+
+            if (position == 1) //Initial position
+            {
+                _xbotCommand.LinearMotionSI(0, carrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.600, 0.600, 0, 0.1, 0.1);
+            }
+
+            if (position == 2) //Capping position
+            {
+                _xbotCommand.LinearMotionSI(0, carrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1);
+            }
+
+            if (position == 3) //End position
+            {
+                _xbotCommand.LinearMotionSI(0, carrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.600, 0.120, 0, 0.1, 0.1);
+            }
+        }
+
+        public void changeFullUnitCarrier(int filledUnitCarrier, int[] xbot_ids)
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
             WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
@@ -445,12 +481,21 @@ namespace simple_pmc_mover
             CMD_params.triggerCmdLabel = 40;
 
             _xbotCommand.WaitUntil(0, filledUnitCarrier, TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
+            _xbotCommand.LinearMotionSI(50, filledUnitCarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.111, 0.293, 0, 0.1, 0.1);
+        }
+
+        public void changeToEmptyUnitCarrier(int emptyUnitCarrier, int filledUnitCarrier)
+        {
+            WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
+
+            CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+            CMD_params.triggerXbotID = filledUnitCarrier;
+            CMD_params.triggerCmdLabel = 50;
             _xbotCommand.WaitUntil(0, emptyUnitCarrier, TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
-            _xbotCommand.LinearMotionSI(0, filledUnitCarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.111, 0.293, 0, 0.1, 0.1);
-            _xbotCommand.LinearMotionSI(0, emptyUnitCarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
 
-
+            _xbotCommand.LinearMotionSI(0, emptyUnitCarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.600, 0.600, 0, 0.1, 0.1);
         }
 
         public void runFillingAndInspection(int[] XID)
@@ -460,7 +505,7 @@ namespace simple_pmc_mover
 
             int[] xbot_ids = XID;
             selector = 7;
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine(" Filling and inspection");
             Console.WriteLine("0    Return ");
             Console.WriteLine("1    Initial postion");
@@ -504,19 +549,35 @@ namespace simple_pmc_mover
                 //_xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitCarrier[2], intialPosUnitCarrier[3], 0, 0.1, 0.1);
                 //_xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitCarrier[4], intialPosUnitCarrier[5], 0, 0.1, 0.1);
 
-
+                 
                 _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosFilling[0], intialPosFilling[1], 0, 0.1, 0.1);
                 _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosFilling[2], intialPosFilling[3], 0, 0.1, 0.1);
 
                 _xbotCommand.LinearMotionSI(0, xbot_ids[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitWeighing[0], intialPosUnitWeighing[1], 0, 0.1, 0.1);
 
                 _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
+
+                _xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosSecondUnitCarrier[0], intialPosSecondUnitCarrier[1], 0, 0.1, 0.1);
                 break;
 
                 case '2':
+                    fillingWeighingInspectionDemo(5, xbot_ids);
+                    carrierToPosition(3, xbot_ids, 1);
+                    carrierToPosition(5, xbot_ids, 2);
+                    // Please insert the capping function here <3333
+                    carrierToPosition(7, xbot_ids, 3);
+
                     fillingWeighingInspectionDemo(3, xbot_ids);
-                    changeUnitCarrier(3, 0, xbot_ids);
+
+                    carrierToPosition(7, xbot_ids, 1);
+                    carrierToPosition(3, xbot_ids, 2);
+                    // Please insert the capping function here <3333
+
+                    carrierToPosition(5, xbot_ids, 3);
                     
+
+
+
 
                     break;
                 case '3':
