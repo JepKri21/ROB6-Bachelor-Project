@@ -14,6 +14,7 @@ namespace simple_pmc_mover
         private System_tests SystemTests = new System_tests();
         private De_nest_test deNestTest = new De_nest_test();
         private De_tubbing_with_bar deTubbingWithBar = new De_tubbing_with_bar();
+        private capping capper = new capping();
 
 
         private static XBotCommands _xbotCommand = new XBotCommands();
@@ -60,6 +61,12 @@ ____________________________________________________________________| ";
                 xbot_ids[i] = Convert.ToInt32(Console.ReadLine());
             }
             */
+
+        }
+
+        public void ExecuteCapping()
+        {
+            capper.PerformCapping();
         }
 
         public void Run()
@@ -198,7 +205,11 @@ ____________________________________________________________________| ";
         static void Main(string[] args)
         {
             Program program = new Program();
-            program.Run();
+            Thread thread1 = new Thread(new ThreadStart(program.Run));
+            Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
+
+            thread1.Start();
+            thread2.Start();
         }
     }
 }
