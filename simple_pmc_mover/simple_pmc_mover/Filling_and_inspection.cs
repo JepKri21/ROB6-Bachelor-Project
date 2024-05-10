@@ -117,8 +117,8 @@ namespace simple_pmc_mover
                         }
 
                         //Filling station waits for the unit carrier 
-                        _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.363, 0.737, 0, 0.1, 0.1);
-                        _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.488, 0.737, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(3, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.363, 0.737, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(3, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.488, 0.737, 0, 0.1, 0.1);
 
 
                         for (int i = 0; i < 10; i++)
@@ -162,7 +162,7 @@ namespace simple_pmc_mover
                                     _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                                 }
                                 //Filling station moves down into the syringes
-                                MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.033, Movement.DIRECTION.X, 0.05, 0.01);
+                                MoveOpposite(7, xbot_ids[0], xbot_ids[1], 0.033, Movement.DIRECTION.X, 0.05, 0.01);
 
                                 time_params.delaySecs = 1;
 
@@ -174,26 +174,26 @@ namespace simple_pmc_mover
                                 //Filling station moves to the next syringe
                                 MoveRelativeTogether(4, xbot_ids[0], xbot_ids[1], -0.0152, Movement.DIRECTION.X, 0.15, 0.5);
                             }
-                            
-
 
 
 
                             //When the first row has been filled
-                            if (y > 0)
+                            if (y >= 1)
                             {
                                 //------------------------- Nów the weighing station
                                 //It moves right under the syrige
+                                CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                                CMD_params.triggerXbotID = xbot_ids[4];
+                                CMD_params.triggerCmdLabel = 11;
 
-                                if (y > 1)
-                                {
-                                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-                                    CMD_params.triggerXbotID = xbot_ids[4];
-                                    CMD_params.triggerCmdLabel = 11;
+                                _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+                                //if (y > 0)
+                                //{
 
-                                    _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                                }
-
+                                //}
+                                CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                                CMD_params.triggerXbotID = xbot_ids[0];
+                                CMD_params.triggerCmdLabel = 3;
 
                                 _xbotCommand.LinearMotionSI(5, xbot_ids[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.536, 0.5314, 0, 0.1, 0.1);
                                 for (int j = 0; j < 9; j++)
@@ -218,6 +218,12 @@ namespace simple_pmc_mover
                                     _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LEVITATE);
                                     _xbotCommand.LevitationCommand(xbot_ids[4], LEVITATEOPTIONS.LEVITATE);
 
+                                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                                    CMD_params.triggerXbotID = xbot_ids[0];
+                                    CMD_params.triggerCmdLabel = 7;
+
+                                    _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+
                                     _xbotCommand.LinearMotionSI(5, xbot_ids[2], POSITIONMODE.RELATIVE,LINEARPATHTYPE.YTHENX, 0, 0.0152, 0, 0.1, 0.1);
 
                                 }
@@ -229,14 +235,11 @@ namespace simple_pmc_mover
 
                             if (y > 1)
                             {
-                                if (y > 2)
-                                {
-                                    CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-                                    CMD_params.triggerXbotID = xbot_ids[4];
-                                    CMD_params.triggerCmdLabel = 11;
+                                CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                                CMD_params.triggerXbotID = xbot_ids[4];
+                                CMD_params.triggerCmdLabel = 11;
 
-                                    _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
-                                }
+                                _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
 
                                 _xbotCommand.LinearMotionSI(1, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.2916, 0.450, 0, 0.1, 0.1);
@@ -266,9 +269,17 @@ namespace simple_pmc_mover
                         XBotStatus weighing = _xbotCommand.GetXbotStatus(xbot_ids[2]);
                         XBotStatus filling = _xbotCommand.GetXbotStatus(xbot_ids[0]);
 
-                        if (visual.XBOTState == XBOTSTATE.XBOT_WAIT && weighing.XBOTState == XBOTSTATE.XBOT_WAIT && filling.XBOTState == XBOTSTATE.XBOT_WAIT)
+                        while (visual.XBOTState != XBOTSTATE.XBOT_WAIT || weighing.XBOTState != XBOTSTATE.XBOT_WAIT || filling.XBOTState != XBOTSTATE.XBOT_WAIT)
                         {
-                            _xbotCommand.RotaryMotionP2P(11, xbot_ids[4], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 1, 2, POSITIONMODE.RELATIVE);
+                            visual = _xbotCommand.GetXbotStatus(xbot_ids[3]);
+                            weighing = _xbotCommand.GetXbotStatus(xbot_ids[2]);
+                            filling = _xbotCommand.GetXbotStatus(xbot_ids[0]);
+                            if ((visual.XBOTState == XBOTSTATE.XBOT_IDLE && weighing.XBOTState == XBOTSTATE.XBOT_IDLE && filling.XBOTState == XBOTSTATE.XBOT_IDLE))
+                            {
+                                _xbotCommand.LinearMotionSI(1, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.360, 0.600, 0, 0.1, 0.1);
+                                _xbotCommand.RotaryMotionP2P(11, xbot_ids[4], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 1, 2, POSITIONMODE.RELATIVE);
+                            }
+                            
                         }
                         /*
 
