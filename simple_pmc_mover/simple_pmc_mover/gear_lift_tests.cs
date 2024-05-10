@@ -258,7 +258,7 @@ namespace simple_pmc_mover
                     PerformTest();
                     break;
                 case '4':
-                    move_xbot_in(ids);
+                    move_xbot_in(0, ids);
                     break;
                 case '\u001b': //escape key
                     return; //exit the program
