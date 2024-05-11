@@ -17,6 +17,7 @@ namespace simple_pmc_mover
         int selector = 8;
         double[] intialPosUnitCarrier = { 0.600, 0.600, 0.600, 0.360, 0.600, 0.120 };
         double[] intialPosSecondUnitCarrier = { 0.600, 0.120 };
+        double[] intialPosThirdUnitCarrier = { 0.120, 0.120 };
         double[] intialPosFilling = { 0.295, 0.840, 0.425, 0.840 };
         double[] intialPosUnitWeighing = { 0.650, 0.840 };
         double[] intialPosUnitVisual = { 0.360, 0.360 };
@@ -42,18 +43,22 @@ namespace simple_pmc_mover
             return CMD_params;
         }
 
-        public WaitUntilTriggerParams unitCarrierToFilling(int carrierID, WaitUntilTriggerParams wait_params) 
+        public WaitUntilTriggerParams unitCarriersMove(int firstCarrierID, WaitUntilTriggerParams wait_params, ushort command_label) 
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
 
-            _xbotCommand.WaitUntil(0, carrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+            _xbotCommand.WaitUntil(0, firstCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+            //_xbotCommand.WaitUntil(0, secondCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+            //_xbotCommand.WaitUntil(0, thirdCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
 
-            _xbotCommand.LinearMotionSI(1, carrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.360, 0.600, 0, 0.1, 0.1);
+            _xbotCommand.LinearMotionSI(command_label, firstCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
+            //_xbotCommand.LinearMotionSI(0, secondCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.600, 0.120, 0, 0.1, 0.1); //Rigtig
+            //_xbotCommand.LinearMotionSI(0, thirdCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1); //Rigtig
 
 
             CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-            CMD_params.triggerXbotID = carrierID;
-            CMD_params.triggerCmdLabel = 1;
+            CMD_params.triggerXbotID = firstCarrierID;
+            CMD_params.triggerCmdLabel = command_label;
 
             return CMD_params;
         }
@@ -87,10 +92,10 @@ namespace simple_pmc_mover
             _xbotCommand.LinearMotionSI(0, xbot1, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.211, 0.737, 0, 0.1, 0.1);
             _xbotCommand.LinearMotionSI(0, xbot2, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.336, 0.737, 0, 0.1, 0.1);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
 
-                if (i == 9) //This finishes the last filling and moves the filling station away from the unit carrier
+                if (i == 2) //This finishes the last filling and moves the filling station away from the unit carrier
                 {
                     MoveOpposite(0, xbot1, xbot2, 0.033, Movement.DIRECTION.X, 0.05, 0.01);
                     time_params.delaySecs = 0.2;
@@ -241,8 +246,9 @@ namespace simple_pmc_mover
             int filling_xbot2 = xbot_ids[1];
             int weighing_xbot = xbot_ids[2];
             int inspection_xbot = xbot_ids[3];
-            int carrier_xbot = xbot_ids[4];
-
+            int carrier_xbot1 = xbot_ids[4];
+            int carrier_xbot2 = xbot_ids[5];
+            int carrier_xbot3 = xbot_ids[6];
 
 
 
@@ -252,13 +258,16 @@ namespace simple_pmc_mover
             Console.WriteLine("0    Return ");
             Console.WriteLine("1    Initial postion");
             Console.WriteLine("2    Function based DEMO");
-            Console.WriteLine("3    ");
+            Console.WriteLine("3    Switch carriers");
             Console.WriteLine("4    ");
             Console.WriteLine("5    ");
             Console.WriteLine("6    ");
             Console.WriteLine("7    ");
             Console.WriteLine("9    ");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+            int carrier_number = 0;
+
             switch (keyInfo.KeyChar)
             {
 
@@ -267,9 +276,12 @@ namespace simple_pmc_mover
                     break;
 
                 case '1':
-                    //First Unit carrier moves to inintal position
+                    // Unit carriers move to inintal positions
                     _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitCarrier[0], intialPosUnitCarrier[1], 0, 0.1, 0.1);
-                    
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosSecondUnitCarrier[0], intialPosSecondUnitCarrier[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[6], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosThirdUnitCarrier[0], intialPosThirdUnitCarrier[1], 0, 0.1, 0.1);
+
+
                     //Gearlift (filling station) moves to inital position
                     _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosFilling[0], intialPosFilling[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosFilling[2], intialPosFilling[3], 0, 0.1, 0.1);
@@ -281,7 +293,6 @@ namespace simple_pmc_mover
                     _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
 
                     //Other unit carriers moves to inital position
-                    //_xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosSecondUnitCarrier[0], intialPosSecondUnitCarrier[1], 0, 0.1, 0.1);
                     break;
 
                 case '2':
@@ -307,37 +318,115 @@ namespace simple_pmc_mover
                     WaitUntilTriggerParams InspectionDone3 = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams InspectionDone4 = new WaitUntilTriggerParams();
 
-
+                    int[] allCarrierIDs = { carrier_xbot1, carrier_xbot2, carrier_xbot3 };
 
                     time_params.delaySecs = 5;
 
-                    CarrierMoves = unitCarrierToFilling(carrier_xbot, time_params);
+                    CarrierMoves = unitCarriersMove(allCarrierIDs[carrier_number%3], time_params, 50);
+
+                    
                     FillingDone1 = FILLING(filling_xbot1, filling_xbot2, CarrierMoves, 20);
 
-                    RotationDone1 = carrierRotates(carrier_xbot, FillingDone1, 10);
+                    RotationDone1 = carrierRotates(allCarrierIDs[carrier_number%3], FillingDone1, 10);
                     FillingDone2 = FILLING(filling_xbot1, filling_xbot2, RotationDone1, 21);
-                    WeighingDone = WEIGHING(weighing_xbot, RotationDone1, 30,false);
+                    WeighingDone = WEIGHING(weighing_xbot, RotationDone1, 30, false);
 
-                    RotationDone2 = carrierRotates(carrier_xbot, FillingDone2, 11);
+                    RotationDone2 = carrierRotates(allCarrierIDs[carrier_number%3], FillingDone2, 11);
                     FillingDone3 = FILLING(filling_xbot1, filling_xbot2, RotationDone2, 22);
                     WeighingDone = WEIGHING(weighing_xbot, RotationDone2, 31, false);
                     InspectionDone1 = INSPECTION(inspection_xbot, RotationDone2, 40);
 
-                    RotationDone3 = carrierRotates(carrier_xbot, FillingDone3, 12);
+                    RotationDone3 = carrierRotates(allCarrierIDs[carrier_number%3], FillingDone3, 12);
                     FillingDone4 = FILLING(filling_xbot1, filling_xbot2, RotationDone3, 23);
                     WeighingDone = WEIGHING(weighing_xbot, RotationDone3, 32, false);
                     InspectionDone2 = INSPECTION(inspection_xbot, RotationDone3, 41);
 
-                    RotationDone4 = carrierRotates(carrier_xbot, FillingDone4,13);
+                    RotationDone4 = carrierRotates(allCarrierIDs[carrier_number%3], FillingDone4, 13);
                     WeighingDone = WEIGHING(weighing_xbot, RotationDone4, 33, true);
                     InspectionDone3 = INSPECTION(inspection_xbot, RotationDone4, 42);
 
-                    RotationDone5 = carrierRotates(carrier_xbot, WeighingDone, 14);
+                    RotationDone5 = carrierRotates(allCarrierIDs[carrier_number%3], InspectionDone3, 14);
                     InspectionDone4 = INSPECTION(inspection_xbot, RotationDone5, 44);
 
+                    
+
+                    /*
+                    int number_of_carriers = 3;
+                    
+                    for (int y = 0; y< 3; y++)
+                    {
+
+                        FillingDone1 = FILLING(filling_xbot1, filling_xbot2, CarrierMoves, 20);
+
+                        RotationDone1 = carrierRotates(allCarrierIDs[y% number_of_carriers], FillingDone1, 10);
+                        FillingDone2 = FILLING(filling_xbot1, filling_xbot2, RotationDone1, 21);
+                        WeighingDone = WEIGHING(weighing_xbot, RotationDone1, 30, false);
+
+                        RotationDone2 = carrierRotates(allCarrierIDs[y% number_of_carriers], FillingDone2, 11);
+                        FillingDone3 = FILLING(filling_xbot1, filling_xbot2, RotationDone2, 22);
+                        WeighingDone = WEIGHING(weighing_xbot, RotationDone2, 31, false);
+                        InspectionDone1 = INSPECTION(inspection_xbot, RotationDone2, 40);
+
+                        RotationDone3 = carrierRotates(allCarrierIDs[y% number_of_carriers], FillingDone3, 12);
+                        FillingDone4 = FILLING(filling_xbot1, filling_xbot2, RotationDone3, 23);
+                        WeighingDone = WEIGHING(weighing_xbot, RotationDone3, 32, false);
+                        InspectionDone2 = INSPECTION(inspection_xbot, RotationDone3, 41);
+
+                        RotationDone4 = carrierRotates(allCarrierIDs[y% number_of_carriers], FillingDone4, 13);
+                        WeighingDone = WEIGHING(weighing_xbot, RotationDone4, 33, true);
+                        InspectionDone3 = INSPECTION(inspection_xbot, RotationDone4, 42);
+
+                        //RotationDone5 = carrierRotates(allCarrierIDs[y% number_of_carriers], InspectionDone3, 14);
+                        //InspectionDone4 = INSPECTION(inspection_xbot, RotationDone5, 44);
+
+                        if (y%3 == 0)
+                        {
+                            CarrierMoves = unitCarriersMove(allCarrierIDs[0], allCarrierIDs[1], allCarrierIDs[2], InspectionDone3, 50);
+                        }
+                        else if (y % 3 == 1)
+                        {
+                            CarrierMoves = unitCarriersMove(allCarrierIDs[1], allCarrierIDs[2], allCarrierIDs[0], InspectionDone3, 50);
+                        }
+                        else if (y % 3 == 2)
+                        {
+                            CarrierMoves = unitCarriersMove(allCarrierIDs[2], allCarrierIDs[0], allCarrierIDs[1], InspectionDone3, 50);
+                        }
+
+                    }
+                    */
+                    
+                    break;
+
+                case '3':
+
+                    carrier_number = carrier_number + 1;
+
+                    if (carrier_number % 3 == 0)
+                    {
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot1, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot2, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.600, 0.120, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot3, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1); 
+                    }
+
+                    if (carrier_number % 3 == 1)
+                    {
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot2, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot3, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.600, 0.120, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot1, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1);
+                    }
+
+                    if (carrier_number % 3 == 2)
+                    {
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot3, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot1, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.600, 0.120, 0, 0.1, 0.1);
+                        _xbotCommand.LinearMotionSI(0, carrier_xbot2, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1);
+                    }
+
+                    
 
 
                     break;
+
 
                 case '\u001b': //escape key
                     return;
