@@ -62,8 +62,8 @@ namespace simple_pmc_mover
                     _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.1065, 0.713, 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.1065, 0.579, 0, 0.1, 0.1);
 
-                    _xbotCommand.LinearMotionSI(0, xbot_ids[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.6165, 0.713, 0, 0.1, 0.1);
-                    _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.6165, 0.579, 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.615, 0.713, 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.615, 0.579, 0, 0.1, 0.1);
                     break;
                 case '2':
                     //initial position for the tub pick up
@@ -74,7 +74,7 @@ namespace simple_pmc_mover
 
                 case '3':
                     //Demo
-
+                    selector = 6;
                     for (int i = 0; i<10; i++)
                     {
 
@@ -102,8 +102,8 @@ namespace simple_pmc_mover
                         MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
 
                         // Grasp the nest
-                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], -0.015, Movement.DIRECTION.X, 0.15, 0.5);
-                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], 0.015, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], -0.0165, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], 0.0165, Movement.DIRECTION.X, 0.15, 0.5);
                         //Lift the nest
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
                         MoveOpposite(2, xbot_ids[2], xbot_ids[3], 0.093, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
@@ -118,13 +118,13 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[6], TRIGGERSOURCE.CMD_LABEL, CMD_params);
                         _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
-                        /* is this still needed?????
+                        // is this still needed?????
                         // the gear lift lands
                         _xbotCommand.LevitationCommand(xbot_ids[0], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[1], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[3], LEVITATEOPTIONS.LAND);
-                        */
+                        //
 
 
                         //---------------The nest is now carryied by the de-tubbing modules.--------------//
@@ -138,8 +138,8 @@ namespace simple_pmc_mover
                         MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.250, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
 
                         // Scissor lifts the tub
-                        MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.05, 0.1);
-                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.05, 0.1);
+                        MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.03, 0.1);
+                        MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.03, 0.1);
 
 
                         // Scissor lift moves fully back
@@ -151,10 +151,10 @@ namespace simple_pmc_mover
                         MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], -0.015, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.1);
 
 
-                        /* Only needed if the gearlift needs to be landed 
+                        // Only needed if the gearlift needs to be landed 
                           
                         // homemade delay function as the wait untill command does not work for landed
-                        XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
+                        status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
                         while (status.XBOTState != XBOTSTATE.XBOT_IDLE)
                         {
                             status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
@@ -165,17 +165,20 @@ namespace simple_pmc_mover
                         _xbotCommand.LevitationCommand(xbot_ids[1], LEVITATEOPTIONS.LEVITATE);
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LEVITATE);
                         _xbotCommand.LevitationCommand(xbot_ids[3], LEVITATEOPTIONS.LEVITATE);
-                        */
+
 
                         //-----------The Tub is now placed and the carriere moves back to retrive the nest.---------------//
-                                                
+
                         // Scissor lift moves under the hanging nest
-                        MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
-                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed * 2, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.50, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.5);
+
 
                         // Scissor lift seperates
-                        MoveOpposite(0, xbot_ids[6], xbot_ids[4], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
-                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.5);
+                        MoveOpposite(0, xbot_ids[6], xbot_ids[4], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.2);
+                        MoveOpposite(0, xbot_ids[7], xbot_ids[5], -0.06, Movement.DIRECTION.X, unloaded_scissorlift_speed, 0.2);
+
+
 
                         //lift the scissor up again
                         MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.025, Movement.DIRECTION.Y, unloaded_scissorlift_speed, 0.005);
@@ -216,8 +219,8 @@ namespace simple_pmc_mover
                         _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
 
                         //Gear lift release the nest
-                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], 0.015, Movement.DIRECTION.X, 0.15, 0.5);
-                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], -0.015, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], 0.0165, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], -0.0165, Movement.DIRECTION.X, 0.15, 0.5);
 
                         //raise the gear 
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.1, 0.1);
@@ -261,8 +264,8 @@ namespace simple_pmc_mover
                         MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.140, Movement.DIRECTION.Y, unloaded_gearlift_speed, 0.5);
 
                         //Grasp the nest
-                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], -0.015, Movement.DIRECTION.X, 0.15, 0.5);
-                        MoveRelativeTogether(2, xbot_ids[2], xbot_ids[3], 0.015, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], -0.0165, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(2, xbot_ids[2], xbot_ids[3], 0.0165, Movement.DIRECTION.X, 0.15, 0.5);
 
                         // wait for the gear to lift
                         CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
@@ -292,12 +295,12 @@ namespace simple_pmc_mover
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
                         MoveOpposite(2, xbot_ids[2], xbot_ids[3], 0.140, Movement.DIRECTION.Y, 0.01, 0.02);
 
-                        /* Dont know if need
+                        // Dont know if need
                         _xbotCommand.LevitationCommand(xbot_ids[0], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[1], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LAND);
                         _xbotCommand.LevitationCommand(xbot_ids[3], LEVITATEOPTIONS.LAND);
-                        */
+                        
 
                         CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                         CMD_params.triggerXbotID = xbot_ids[3];
@@ -346,7 +349,7 @@ namespace simple_pmc_mover
                         MoveRelativeTogether(0, xbot_ids[4], xbot_ids[6], -0.015, Movement.DIRECTION.Y, 0.005, 0.005);
                         MoveRelativeTogether(0, xbot_ids[5], xbot_ids[7], 0.015, Movement.DIRECTION.Y, 0.005, 0.005);
 
-                        /*
+                        
                         status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
                         while (status.XBOTState != XBOTSTATE.XBOT_IDLE)
                         {
@@ -357,15 +360,24 @@ namespace simple_pmc_mover
                         _xbotCommand.LevitationCommand(xbot_ids[0], LEVITATEOPTIONS.LEVITATE);
                         _xbotCommand.LevitationCommand(xbot_ids[1], LEVITATEOPTIONS.LEVITATE);
                         _xbotCommand.LevitationCommand(xbot_ids[2], LEVITATEOPTIONS.LEVITATE);
-                        */
+                        
+                        /*
+                        CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                        CMD_params.triggerXbotID = xbot_ids[5];
+                        CMD_params.triggerCmdLabel = 1;
 
+                        _xbotCommand.WaitUntil(0, xbot_ids[0], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[1], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[2], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[3], TRIGGERSOURCE.CMD_LABEL, CMD_params);
+                        */
                         // lower the nest back into the tub
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
                         MoveOpposite(0, xbot_ids[2], xbot_ids[3], -0.093, Movement.DIRECTION.Y, 0.01, 0.01);
 
                         // Release the nest
-                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], 0.015, Movement.DIRECTION.X, 0.15, 0.5);
-                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], -0.015, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[0], xbot_ids[1], 0.0165, Movement.DIRECTION.X, 0.15, 0.5);
+                        MoveRelativeTogether(0, xbot_ids[2], xbot_ids[3], -0.0165, Movement.DIRECTION.X, 0.15, 0.5);
 
                         // Raise the gear lifts again
                         MoveOpposite(0, xbot_ids[0], xbot_ids[1], 0.093, Movement.DIRECTION.Y, 0.1, 0.3);
