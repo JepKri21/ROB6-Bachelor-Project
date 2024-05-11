@@ -14,6 +14,7 @@ namespace simple_pmc_mover
         private System_tests SystemTests = new System_tests();
         private De_nest_test deNestTest = new De_nest_test();
         private Filling_and_inspection fillingAndInspection = new Filling_and_inspection();
+        private Function_based_filling_weighing_inspection functionBasedFilling = new Function_based_filling_weighing_inspection();
 
 
 
@@ -32,7 +33,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        int[] xbot_ids = {1,4,6,2,3,5,9,9};
+        int[] xbot_ids = {4,5,1,2,7,9,9,9};
         //int[] xbot_ids;
 
        
@@ -94,6 +95,7 @@ ____________________________________________________________________| ";
                     Console.WriteLine("3    System tests");
                     Console.WriteLine("4    De-nest test");
                     Console.WriteLine("7    Filling And Inspection");
+                    Console.WriteLine("8    Function based filling and inspection");
                     Console.WriteLine("ESC: Exit program");
                     ConsoleKeyInfo keyinfo = Console.ReadKey();
 
@@ -120,6 +122,10 @@ ____________________________________________________________________| ";
 
                         case '7':
                             selector = 7;
+                            break;
+
+                        case '8':
+                            selector = 8;
                             break;
 
                         case '\u001b': //escape key
@@ -167,6 +173,12 @@ ____________________________________________________________________| ";
                     fillingAndInspection.runFillingAndInspection(xbot_ids);
                     selector = fillingAndInspection.setSelectorOne();
 
+                }
+
+                while (selector == 8)
+                {
+                    functionBasedFilling.runFunctionBasedFillingAndInspection(xbot_ids);
+                    selector = functionBasedFilling.setSelectorOne();
                 }
 
 
