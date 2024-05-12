@@ -17,6 +17,7 @@ namespace simple_pmc_mover
         int selector = 8;
         double[] intialPosUnitCarrier = { 0.600, 0.600, 0.600, 0.360, 0.600, 0.120 };
         double[] intialPosSecondUnitCarrier = { 0.600, 0.120 };
+        double[] intialPosThirdUnitCarrier = { 0.120, 0.120 };
         double[] intialPosFilling = { 0.295, 0.840, 0.425, 0.840 };
         double[] intialPosUnitWeighing = { 0.650, 0.840 };
         double[] intialPosUnitVisual = { 0.360, 0.360 };
@@ -26,6 +27,25 @@ namespace simple_pmc_mover
             return selector;
         }
 
+        public WaitUntilTriggerParams unitCarriersMove(int firstCarrierID, int secondCarrierID, int thirdCarrierID, WaitUntilTriggerParams wait_params, ushort command_label)
+        {
+            WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
+
+            _xbotCommand.WaitUntil(0, firstCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+            _xbotCommand.WaitUntil(0, secondCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+            _xbotCommand.WaitUntil(0, thirdCarrierID, TRIGGERSOURCE.CMD_LABEL, wait_params);
+
+            _xbotCommand.LinearMotionSI(command_label, firstCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.600, 0, 0.1, 0.1);
+            _xbotCommand.LinearMotionSI(0, secondCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.600, 0.120, 0, 0.1, 0.1);
+            _xbotCommand.LinearMotionSI(0, thirdCarrierID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.120, 0.120, 0, 0.1, 0.1);
+
+
+            CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+            CMD_params.triggerXbotID = firstCarrierID;
+            CMD_params.triggerCmdLabel = command_label;
+
+            return CMD_params;
+        }
         public WaitUntilTriggerParams test_wait_command(int ID, WaitUntilTriggerParams wait_params, ushort command_label) 
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
@@ -154,6 +174,8 @@ namespace simple_pmc_mover
 
                     if (last_round)
                     {
+                        time_params.delaySecs = 0.5;
+                        _xbotCommand.WaitUntil(0, weighingID, TRIGGERSOURCE.TIME_DELAY, time_params);
                         _xbotCommand.LinearMotionSI(0, weighingID, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitWeighing[0], intialPosUnitWeighing[1], 0, 0.1, 0.1);
                     }
 
@@ -242,8 +264,8 @@ namespace simple_pmc_mover
             int weighing_xbot = xbot_ids[2];
             int inspection_xbot = xbot_ids[3];
             int carrier_xbot = xbot_ids[4];
-
-
+            int carrier_xbot2 = xbot_ids[5];
+            int carrier_xbot3 = xbot_ids[6];
 
 
             selector = 8;
@@ -261,15 +283,27 @@ namespace simple_pmc_mover
             ConsoleKeyInfo keyInfo = Console.ReadKey();
             switch (keyInfo.KeyChar)
             {
-
+                
                 case '0':
                     selector = 1;
                     break;
 
                 case '1':
+                    _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+
                     //First Unit carrier moves to inintal position
                     _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitCarrier[0], intialPosUnitCarrier[1], 0, 0.1, 0.1);
-                    
+
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosSecondUnitCarrier[0], intialPosSecondUnitCarrier[1], 0, 0.1, 0.1);
+
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[6], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosThirdUnitCarrier[0], intialPosThirdUnitCarrier[1], 0, 0.1, 0.1);
+
                     //Gearlift (filling station) moves to inital position
                     _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosFilling[0], intialPosFilling[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, xbot_ids[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosFilling[2], intialPosFilling[3], 0, 0.1, 0.1);
@@ -280,14 +314,31 @@ namespace simple_pmc_mover
                     //Visual inspection moves to inital position
                     _xbotCommand.LinearMotionSI(0, xbot_ids[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitVisual[0], intialPosUnitVisual[1], 0, 0.1, 0.1);
 
+                    _xbotCommand.MotionBufferControl(xbot_ids[0],MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.CLEARBUFFER);
+
                     //Other unit carriers moves to inital position
                     //_xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosSecondUnitCarrier[0], intialPosSecondUnitCarrier[1], 0, 0.1, 0.1);
                     break;
 
                 case '2':
+                    _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
                     //You don't actually need to create this many trigger params, I am fairly cartain you can just reuse the same one
                     //because of the changing labels
                     WaitUntilTriggerParams CarrierMoves = new WaitUntilTriggerParams();
+                    WaitUntilTriggerParams CarrierMoves1 = new WaitUntilTriggerParams();
+                    WaitUntilTriggerParams CarrierMoves2 = new WaitUntilTriggerParams();
 
                     WaitUntilTriggerParams FillingDone1 = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams FillingDone2 = new WaitUntilTriggerParams();
@@ -301,6 +352,7 @@ namespace simple_pmc_mover
                     WaitUntilTriggerParams RotationDone5 = new WaitUntilTriggerParams();
 
                     WaitUntilTriggerParams WeighingDone = new WaitUntilTriggerParams();
+                    //WaitUntilTriggerParams WeighingDone2 = new WaitUntilTriggerParams();
 
                     WaitUntilTriggerParams InspectionDone1 = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams InspectionDone2 = new WaitUntilTriggerParams();
@@ -334,9 +386,58 @@ namespace simple_pmc_mover
 
                     RotationDone5 = carrierRotates(carrier_xbot, WeighingDone, 14);
                     InspectionDone4 = INSPECTION(inspection_xbot, RotationDone5, 44);
+                    XBotStatus status = _xbotCommand.GetXbotStatus(carrier_xbot);
+                    while (status.XBOTState != XBOTSTATE.XBOT_IDLE)
+                    {
+                        status = _xbotCommand.GetXbotStatus(carrier_xbot);
 
+                    }
+                    _xbotCommand.LinearMotionSI(0, carrier_xbot, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.360, 0.600, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(14, carrier_xbot, ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
+                    
+                    /*
+                    CarrierMoves1= unitCarriersMove(carrier_xbot2, carrier_xbot3, carrier_xbot, InspectionDone4, 51);
+                    FillingDone1 = FILLING(filling_xbot1, filling_xbot2, CarrierMoves1, 60);
 
+                    RotationDone1 = carrierRotates(carrier_xbot2, FillingDone1, 70);
+                    FillingDone2 = FILLING(filling_xbot1, filling_xbot2, RotationDone1, 61);
+                    WeighingDone = WEIGHING(weighing_xbot, RotationDone1, 80, false);
 
+                    RotationDone2 = carrierRotates(carrier_xbot2, FillingDone2, 71);
+                    FillingDone3 = FILLING(filling_xbot1, filling_xbot2, RotationDone2, 62);
+                    WeighingDone = WEIGHING(weighing_xbot, RotationDone2, 81, false);
+                    InspectionDone1 = INSPECTION(inspection_xbot, RotationDone2, 90);
+
+                    RotationDone3 = carrierRotates(carrier_xbot2, FillingDone3, 72);
+                    FillingDone4 = FILLING(filling_xbot1, filling_xbot2, RotationDone3, 63);
+                    WeighingDone = WEIGHING(weighing_xbot, RotationDone3, 82, false);
+                    InspectionDone2 = INSPECTION(inspection_xbot, RotationDone3, 91);
+
+                    RotationDone4 = carrierRotates(carrier_xbot2, FillingDone4, 73);
+                    WeighingDone = WEIGHING(weighing_xbot, RotationDone4, 83, true);
+                    InspectionDone3 = INSPECTION(inspection_xbot, RotationDone4, 92);
+
+                    RotationDone5 = carrierRotates(carrier_xbot2, WeighingDone, 74);
+                    InspectionDone4 = INSPECTION(inspection_xbot, RotationDone5, 93);
+
+                    CarrierMoves2=unitCarriersMove(carrier_xbot3, carrier_xbot, carrier_xbot2, InspectionDone4, 78);
+                    */
+                    _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    /*XBotStatus status = _xbotCommand.GetXbotStatus(carrier_xbot);
+                    while (status.XBOTState != XBOTSTATE.XBOT_IDLE)
+                    {
+                        status = _xbotCommand.GetXbotStatus(carrier_xbot);
+                        
+                    }
+                    _xbotCommand.LinearMotionSI(0, carrier_xbot, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.360, 0.600, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(14, carrier_xbot, ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
+                    */
                     break;
 
                 case '\u001b': //escape key
