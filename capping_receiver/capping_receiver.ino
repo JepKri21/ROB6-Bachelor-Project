@@ -30,10 +30,11 @@ void loop() {
       
       PIN = received_data.toInt();  
       pinMode(PIN,OUTPUT);
+      delay(500);
       digitalWrite(PIN,LOW);
       // Process received data
       //Serial.println(PIN);
-      
+      delay(500);
       digitalWrite(PIN,HIGH);
       delay(1000);
       

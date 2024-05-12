@@ -78,3 +78,11 @@ C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Deb
 C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
 C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.IO.Ports.dll
 C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm64\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-x64\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-arm64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.IO.Ports.dll

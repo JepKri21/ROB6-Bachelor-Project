@@ -268,7 +268,7 @@ namespace simple_pmc_mover
 
                 case '1':
                     //First Unit carrier moves to inintal position
-                    _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, intialPosUnitCarrier[0], intialPosUnitCarrier[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosUnitCarrier[0], intialPosUnitCarrier[1], 0, 0.1, 0.1);
                     
                     //Gearlift (filling station) moves to inital position
                     _xbotCommand.LinearMotionSI(0, xbot_ids[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, intialPosFilling[0], intialPosFilling[1], 0, 0.1, 0.1);
@@ -307,6 +307,13 @@ namespace simple_pmc_mover
                     WaitUntilTriggerParams InspectionDone3 = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams InspectionDone4 = new WaitUntilTriggerParams();
 
+                    _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.BLOCKBUFFER);
 
 
                     time_params.delaySecs = 5;
@@ -335,6 +342,15 @@ namespace simple_pmc_mover
                     RotationDone5 = carrierRotates(carrier_xbot, WeighingDone, 14);
                     InspectionDone4 = INSPECTION(inspection_xbot, RotationDone5, 44);
 
+                    _xbotCommand.LinearMotionSI(0, carrier_xbot, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.111, 0.293, 0, 0.1, 0.1);
+
+                    _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[2], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[3], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
+                    _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
 
 
                     break;

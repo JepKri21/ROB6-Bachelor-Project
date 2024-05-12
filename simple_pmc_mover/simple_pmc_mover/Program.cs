@@ -35,7 +35,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        int[] xbot_ids = {4,5,1,2,7,6,8,9};
+        int[] xbot_ids = {6,5,4,3,1,6,8,9};
         //int[] xbot_ids;
 
        
@@ -78,13 +78,13 @@ ____________________________________________________________________| ";
         public void Run()
 
         {
-            
+
             //int[] collectedXbots = { xbot_ids[4], xbot_ids[5] , xbot_ids[6], xbot_ids[7] };
             //int[] xbots1 = { xbot_ids[4], xbot_ids[5] };
             //int[] xbots2 = { xbot_ids[6], xbot_ids[7] };
             do
             {
-                Console.Title="Aseptic Planar Technology";
+                Console.Title = "Aseptic Planar Technology";
                 Console.WriteLine("Demo Program V 1.0");
 
                 while (selector == 0)
@@ -92,7 +92,7 @@ ____________________________________________________________________| ";
                     CONNECTIONSTATUS status = connectionHandler.ConnectAndGainMastership();
                     Console.WriteLine(status);
                     xbotCalibration();
-                    
+
                     selector = 1;
 
 
@@ -101,7 +101,7 @@ ____________________________________________________________________| ";
                 {
                     Console.Clear();
                     Console.WriteLine(title);
-                    
+
                     Console.WriteLine("Choose Test program by entering the appropriate number: ");
                     Console.WriteLine("0:   Run Setup");
                     Console.WriteLine("1    Scissor lift tests");
@@ -117,7 +117,7 @@ ____________________________________________________________________| ";
                     switch (keyinfo.KeyChar)
                     {
                         case '0':
-                            selector = 0; 
+                            selector = 0;
                             break;
 
                         case '1':
@@ -161,7 +161,7 @@ ____________________________________________________________________| ";
                 {
                     scissorTest.Run_tests(xbot_ids);
                     selector = scissorTest.setSelectorOne();
-                } 
+                }
 
                 while (selector == 3)
                 {
@@ -172,10 +172,10 @@ ____________________________________________________________________| ";
 
                 while (selector == 4)
                 {
-                    
-                    
-                        SystemTests.runSystemTests(xbot_ids);
-                    
+
+
+                    SystemTests.runSystemTests(xbot_ids);
+
 
                     selector = SystemTests.setSelectorOne();
 
@@ -191,6 +191,7 @@ ____________________________________________________________________| ";
                 {
                     deNestTest.deNestingStepByStep(xbot_ids);
                     selector = deNestTest.setSelectorOne();
+                }
                 while (selector == 7)
                 {
                     fillingAndInspection.runFillingAndInspection(xbot_ids);
@@ -198,7 +199,7 @@ ____________________________________________________________________| ";
 
                 }
 
-                }
+
                 while (selector == 51)
                 {
                     deNestTest.unitCarriereRotation(xbot_ids);
@@ -219,12 +220,17 @@ ____________________________________________________________________| ";
                 {
                     deTubbingWithBar.runDeTubbingWithBarStepByStep(xbot_ids);
                     selector = deTubbingWithBar.setSelectorOne();
+                }
 
                 while (selector == 8)
                 {
                     functionBasedFilling.runFunctionBasedFillingAndInspection(xbot_ids);
                     selector = functionBasedFilling.setSelectorOne();
                 }
+
+
+
+
 
 
             } while (true);

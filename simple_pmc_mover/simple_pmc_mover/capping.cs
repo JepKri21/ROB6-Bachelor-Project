@@ -21,7 +21,7 @@ namespace simple_pmc_mover
         char SOT = '<';
         char EOT = '>';
         int sides_to_fill = 4;
-        int syringes_to_fill = 9;
+        int syringes_to_fill = 10;
         string PIN = "2";
 
         double[] start_position = { 0.111, 0.293 };
@@ -36,12 +36,14 @@ namespace simple_pmc_mover
         public void PerformCapping()
         {
             // first we set up the communication
+            Console.WriteLine("capping thread running");
 
             int[] xbot_ids = { 2, 3, 4, 5, 6, 7, 8, 1 };
             _serialPort = new SerialPort();
-            _serialPort.PortName = "COM8";
+            _serialPort.PortName = "COM7";
             _serialPort.BaudRate = 115200;
             XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+            
             while (true)
             {
                 while (_serialPort.IsOpen == false)
@@ -49,21 +51,24 @@ namespace simple_pmc_mover
                     _serialPort.Open();
                 }
 
-                DetectCapping(xbot_ids);
+               
 
                 // the xbot is now under the capper
                 // move syringe under the capper
 
                 for (int i = 0; i < sides_to_fill; i++)
                 {
+                    DetectCapping(xbot_ids);
                     for (int j = 0; j < syringes_to_fill; j++)
                     {
+                        
+
                         //Console.WriteLine("the gates are open");
                         _serialPort.WriteLine(SOT.ToString());
                         _serialPort.WriteLine(PIN);
                         _serialPort.WriteLine(EOT.ToString());
 
-
+                        //Console.WriteLine("eot send");
 
                         while (finished_cap == false)
                         {
@@ -84,16 +89,23 @@ namespace simple_pmc_mover
                         }
                         _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0, 0.015, 0, 0.5, 1);
 
+                        
                     }
 
-                    _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
-                    _xbotCommand.RotaryMotionP2P(0, xbot_ids[7], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 0.5, 1, POSITIONMODE.RELATIVE);
-                    _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, start_position[0], start_position[1], 0, 0.5, 1);
-                    //rotate the syringe holder
-
+                    if (i < 3)
+                    {
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                        _xbotCommand.RotaryMotionP2P(0, xbot_ids[7], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, start_position[0], start_position[1], 0, 0.5, 1);
+                        //rotate the syringe holder
+                    }
+                    else
+                    {
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                    }
                 }
                 _serialPort.Close();
-                _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.111, 0.720, 0, 0.5, 1);
+                
             }
         }
 
@@ -145,7 +157,7 @@ namespace simple_pmc_mover
 
             XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
             double[] position = status.FeedbackPositionSI;
-
+            
 
             while (!IsObjectWithinThreshold(position[0], position[1],0.0001))
             {
