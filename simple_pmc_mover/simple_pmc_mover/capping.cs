@@ -33,16 +33,16 @@ namespace simple_pmc_mover
 
 
 
-        public void PerformCapping()
+        public void PerformCapping(int[] XID)
         {
             // first we set up the communication
             Console.WriteLine("capping thread running");
 
-            int[] xbot_ids = { 2, 3, 4, 5, 6, 7, 8, 1 };
+            int[] xbot_ids = XID;
             _serialPort = new SerialPort();
             _serialPort.PortName = "COM7";
             _serialPort.BaudRate = 115200;
-            XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+            XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
             
             while (true)
             {
@@ -82,26 +82,26 @@ namespace simple_pmc_mover
 
                         
 
-                        status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+                        status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
                         while (status.XBOTState != XBOTSTATE.XBOT_IDLE)
                         {
-                            status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+                            status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
                         }
-                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0, 0.015, 0, 0.5, 1);
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0, 0.015, 0, 0.5, 1);
 
                         
                     }
 
                     if (i < 3)
                     {
-                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
-                        _xbotCommand.RotaryMotionP2P(0, xbot_ids[7], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
-                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, start_position[0], start_position[1], 0, 0.5, 1);
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                        _xbotCommand.RotaryMotionP2P(0, xbot_ids[4], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, start_position[0], start_position[1], 0, 0.5, 1);
                         //rotate the syringe holder
                     }
                     else
                     {
-                        _xbotCommand.LinearMotionSI(4, xbot_ids[7], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                        _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
                     }
                 }
                 _serialPort.Close();
@@ -155,13 +155,13 @@ namespace simple_pmc_mover
         {
             int[] xbot_ids = XID;
 
-            XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+            XBotStatus status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
             double[] position = status.FeedbackPositionSI;
             
 
             while (!IsObjectWithinThreshold(position[0], position[1],0.0001))
             {
-                status = _xbotCommand.GetXbotStatus(xbot_ids[7]);
+                status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
                 position = status.FeedbackPositionSI;
                 
             }

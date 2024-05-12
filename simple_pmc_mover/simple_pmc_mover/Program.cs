@@ -35,7 +35,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        int[] xbot_ids = {6,5,4,3,1,6,8,9};
+        public int[] xbot_ids = {6,5,4,3,1,6,8,9};
         //int[] xbot_ids;
 
        
@@ -72,7 +72,7 @@ ____________________________________________________________________| ";
 
         public void ExecuteCapping()
         {
-            capper.PerformCapping();
+            capper.PerformCapping(xbot_ids);
         }
 
         public void Run()
@@ -238,6 +238,7 @@ ____________________________________________________________________| ";
 
         static void Main(string[] args)
         {
+
             Program program = new Program();
             Thread thread1 = new Thread(new ThreadStart(program.Run));
             Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
