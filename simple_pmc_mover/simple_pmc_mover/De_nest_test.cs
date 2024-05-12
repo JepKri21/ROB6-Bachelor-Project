@@ -273,6 +273,7 @@ namespace simple_pmc_mover
 
             double line_shift = 0.0152 / 2;
 
+            /*
             if (shifted == true)
             {
                 double[] linedenester_init = { 0.527 - line_shift, 0.410, 0.527 - line_shift, 0.263 };
@@ -281,12 +282,18 @@ namespace simple_pmc_mover
                 _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_init[0], linedenester_init[1], 0, 0.1, 0.1);
 
             }
+            
             else
             {
                 double[] linedenester_init = { 0.527, 0.410, 0.527, 0.263 };
                 _xbotCommand.LinearMotionSI(command_label, lineDenesterIDs[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_init[2], linedenester_init[3], 0, 0.1, 0.1);
                 _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_init[0], linedenester_init[1], 0, 0.1, 0.1);
             }
+            */
+
+            double[] linedenester_init = { 0.525, 0.410, 0.525, 0.263 };
+            _xbotCommand.LinearMotionSI(command_label, lineDenesterIDs[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_init[2], linedenester_init[3], 0, 0.1, 0.1);
+            _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_init[0], linedenester_init[1], 0, 0.1, 0.1);
 
             CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
             CMD_params.triggerXbotID = lineDenesterIDs[1];
@@ -314,14 +321,17 @@ namespace simple_pmc_mover
 
             //Denester moves closer
             double line_pusher_increment = 0.0127;
-            double[] linedenester_end = { 0.527, 0.475, 0.527, 0.328 };
+            //double[] linedenester_end = { 0.527, 0.475, 0.527, 0.328 };
+            double[] linedenester_end = { 0.525, 0.475, 0.525, 0.328 };
             double line_shift = 0.0152 / 2;
 
+            /*
             if (shifted == false)
             {
                 linedenester_end[0] = 0.527 - line_shift;
                 linedenester_end[2] = 0.527 - line_shift;
             }
+            */
           
             // turn these into relative movements and add shifted-------------------------------------------------------------------//
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester_end[0], linedenester_end[1] + (line_number * line_pusher_increment), 0, 0.1, 0.1);
@@ -889,7 +899,8 @@ namespace simple_pmc_mover
 
                         if (i== 4)
                         {
-                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, true);
+                            //The wait commands here are a bit iffy, I think it is something within the function itself which I made to avoid exactly this.
+                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, true); //Something here doesn't work, the rest should
 
                         }
                         De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, false);
