@@ -295,15 +295,22 @@ namespace simple_pmc_mover
             return CMD_params;
         }
 
-        public WaitUntilTriggerParams lineDenesterGrips(int[] lineDenesterIDs, int line_number,  WaitUntilTriggerParams wait_params, ushort command_label, bool shifted)
+        public WaitUntilTriggerParams lineDenesterGrips(int[] lineDenesterIDs, int line_number,  WaitUntilTriggerParams wait_params, ushort command_label, bool shifted, bool second_run)
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
 
             //Some of these wait commands might need to be only for one the de-nest xbots, as one has to
             //wait on the other since they don't move the same amount
 
-            _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
-            //_xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, wait_params);
+            if (second_run == false)
+            {
+                _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
+            }
+            else if (second_run == true)
+            {
+                _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
+                _xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, wait_params);
+            }
 
             //Denester moves closer
             double line_pusher_increment = 0.0127;
@@ -838,11 +845,11 @@ namespace simple_pmc_mover
                         if (i == 0) //This if-statement is just because the wait command are fucking with us
                         {
                             time.delaySecs = 10;
-                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, time, 1040, shifting); 
+                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, time, 1040, shifting, false); 
                         }
                         else
                         {
-                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, De_nester_approach, 1040, shifting);
+                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, De_nester_approach, 1040, shifting, false);
                         }
 
                         De_nester_moves_to_carrier = lineDenesterMovesToCarrier(lineDeNesterIDs, De_nester_grips, 1050);
@@ -866,6 +873,48 @@ namespace simple_pmc_mover
                     }
 
                     Switch_carriers = switchCarriers(unitCarrierIDs[0], unitCarrierIDs[1], De_nester_approach, 1120);
+                    last_trigger_label++;
+
+                    for (int i = 4; i < 8; i++)
+                    {
+
+                        if (i % 2 == 0)
+                        {
+                            shifting = true;
+                        }
+                        else if (i % 2 == 1)
+                        {
+                            shifting = false;
+                        }
+
+                        if (i== 4)
+                        {
+                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, true);
+
+                        }
+                        De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, false);
+                        
+                        De_nester_moves_to_carrier = lineDenesterMovesToCarrier(lineDeNesterIDs, De_nester_grips, 2050);
+
+                        Lowering_syringes = lowerSyringesIntoCarrier(lineDeNesterIDs, De_nester_moves_to_carrier, 2060);
+
+                        De_nester_moves_back_to_nest = de_nester_back_to_nest(lineDeNesterIDs, Lowering_syringes, 2070);
+
+                        Lift_scissor_lift = liftingScissorLift(scissorLiftIDs, De_nester_moves_to_carrier, 2080);
+
+                        Line_pusher_moves = linePusherMoves(xbot_ids[4], i + 1, Lowering_syringes, 2090);
+
+                        Scissor_lift_lowers = scissorLiftLowers(scissorLiftIDs, De_nester_moves_back_to_nest, 2100);
+
+                        unit_carrier_rotates = rotateUnitCarrier(unitCarrierIDs, 1, Line_pusher_moves, 2105);
+
+                        De_nester_approach = lineDenesterMovesForward(lineDeNesterIDs, Scissor_lift_lowers, last_trigger_label, shifting);
+
+                        last_trigger_label++;
+
+                    }
+
+
 
                     _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
                     _xbotCommand.MotionBufferControl(xbot_ids[1], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
