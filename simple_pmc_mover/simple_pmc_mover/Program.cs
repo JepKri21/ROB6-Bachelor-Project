@@ -2,6 +2,7 @@
 
 using PMCLIB;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace simple_pmc_mover
 {
@@ -35,7 +36,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        public int[] xbot_ids = {4,5,2,1,6,3,8,7};
+        public int[] xbot_ids = {2,1,8,7,4,3,6,5};
         //int[] xbot_ids;
 
        
@@ -180,6 +181,10 @@ ____________________________________________________________________| ";
                     selector = SystemTests.setSelectorOne();
 
                 }
+                 
+                
+                
+
 
                 while (selector == 5)
                 {
