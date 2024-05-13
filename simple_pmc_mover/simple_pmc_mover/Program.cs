@@ -35,7 +35,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        public int[] xbot_ids = {6,5,4,3,1,6,8,9};
+        public int[] xbot_ids = {4,5,2,1,6,3,8,7};
         //int[] xbot_ids;
 
        
@@ -241,10 +241,10 @@ ____________________________________________________________________| ";
 
             Program program = new Program();
             Thread thread1 = new Thread(new ThreadStart(program.Run));
-            Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
+            //Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
 
             thread1.Start();
-            thread2.Start();
+            //thread2.Start();
         }
     }
 }

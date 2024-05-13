@@ -260,6 +260,24 @@ namespace simple_pmc_mover
                 case '4':
                     move_xbot_in(0, ids);
                     break;
+
+                case '5':
+                    _xbotCommand.LinearMotionSI(0, XID[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.1068, 0.534, 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, XID[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.1068, 0.400, 0, 0.1, 0.1);
+
+                    _xbotCommand.LinearMotionSI(0, XID[2], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.635, 0.534 , 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, XID[3], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.635, 0.400 , 0, 0.1, 0.1);
+                    break;
+
+                case '6':
+                    MoveOpposite(0, XID[0], XID[1], -0.165, Movement.DIRECTION.Y, 0.05, 0.01);
+                    MoveOpposite(0, XID[2], XID[3], -0.165, Movement.DIRECTION.Y, 0.05, 0.01);
+
+
+                    MoveOpposite(0, XID[0], XID[1], 0.165, Movement.DIRECTION.Y, 0.05, 0.01);
+                    MoveOpposite(0, XID[2], XID[3], 0.165, Movement.DIRECTION.Y, 0.05, 0.01);
+                    break;
+
                 case '\u001b': //escape key
                     return; //exit the program
 
