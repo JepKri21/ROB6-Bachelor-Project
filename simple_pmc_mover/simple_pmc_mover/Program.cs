@@ -37,7 +37,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        public int[] xbot_ids = {2,1,8,7,4,3,6,5};
+        public int[] xbot_ids = {2,1,8,7,3,6,4,5};
         //int[] xbot_ids;
 
        
@@ -256,18 +256,18 @@ ____________________________________________________________________| ";
 
             Program program = new Program();
             Thread thread1 = new Thread(new ThreadStart(program.Run));
-            Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
-            Thread thread3 = new Thread(new ThreadStart(program.ExecuteDataLogger));
+            //Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
+            //Thread thread3 = new Thread(new ThreadStart(program.ExecuteDataLogger));
 
 
             thread1.Name = "Main Program";
-            thread2.Name = "capping";
-            thread3.Name = "DataLogger";
+            //thread2.Name = "capping";
+            //thread3.Name = "DataLogger";
 
 
             thread1.Start();
-            thread2.Start();
-            thread3.Start();
+            //thread2.Start();
+            //thread3.Start();
         }
     }
 }

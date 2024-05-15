@@ -36,15 +36,15 @@ namespace simple_pmc_mover
 
             for (int i = 0; i < 6; i++)
             {
-                _params.positions[0, i] = i;// status.FeedbackPositionSI[i];
+                _params.positions[0, i] = _params.status.FeedbackPositionSI[i];
                 
 
             }
 
             for (int i = 0; i < 6; i++)
             {
-                Console.WriteLine("sampling1");
-                _params.positions[1, i] = i;//status.FeedbackPositionSI[i];
+                
+                _params.positions[1, i] = _params.status.FeedbackPositionSI[i];
             }
 
 
@@ -118,18 +118,17 @@ namespace simple_pmc_mover
                     stopLoop = true;
                     
                 }
-
-                
-                else if (key.KeyChar == 'H' || key.KeyChar == 'e')
+                else if (key.KeyChar == 'R' || key.KeyChar == 'r' && stopLoop == true)
                 {
-                    Console.Clear();
                     Console.WriteLine("Saving");
-                    
-                    DataTableToCsv(table1,filename_xbot1);
+
+                    DataTableToCsv(table1, filename_xbot1);
                     DataTableToCsv(table2, filename_xbot2);
+                    Console.WriteLine("aVED");
                 }
-                Console.Clear();
-                Console.WriteLine("returned");
+              
+                
+                
 
             }
         }
