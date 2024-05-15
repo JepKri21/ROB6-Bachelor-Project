@@ -48,7 +48,7 @@ namespace simple_pmc_mover
             {
                 while (_serialPort.IsOpen == false)
                 {
-                    _serialPort.Open();
+                    //_serialPort.Open();
                 }
 
                

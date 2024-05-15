@@ -2,6 +2,7 @@
 
 using PMCLIB;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Security.Cryptography;
 
 namespace simple_pmc_mover
@@ -18,7 +19,7 @@ namespace simple_pmc_mover
         private capping capper = new capping();
         private Filling_and_inspection fillingAndInspection = new Filling_and_inspection();
         private Function_based_filling_weighing_inspection functionBasedFilling = new Function_based_filling_weighing_inspection();
-
+        private DataLogger dataLogger = new DataLogger();
 
 
 
@@ -76,7 +77,12 @@ ____________________________________________________________________| ";
             capper.PerformCapping(xbot_ids);
         }
 
-        public void Run()
+        public void ExecuteDataLogger()
+        {
+            dataLogger.performSampling();
+        }
+
+        public async void Run()
 
         {
 
@@ -100,7 +106,7 @@ ____________________________________________________________________| ";
                 }
                 while (selector == 1)
                 {
-                    Console.Clear();
+                    //Console.Clear();
                     Console.WriteLine(title);
 
                     Console.WriteLine("Choose Test program by entering the appropriate number: ");
@@ -146,6 +152,12 @@ ____________________________________________________________________| ";
 
                         case '8':
                             selector = 8;
+                            break;
+
+                        case 's':
+
+                           
+                            
                             break;
 
                         case '\u001b': //escape key
@@ -234,22 +246,28 @@ ____________________________________________________________________| ";
                 }
 
 
-
-
-
-
             } while (true);
         }
+
+
 
         static void Main(string[] args)
         {
 
             Program program = new Program();
             Thread thread1 = new Thread(new ThreadStart(program.Run));
-            //Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
+            Thread thread2 = new Thread(new ThreadStart(program.ExecuteCapping));
+            Thread thread3 = new Thread(new ThreadStart(program.ExecuteDataLogger));
+
+
+            thread1.Name = "Main Program";
+            thread2.Name = "capping";
+            thread3.Name = "DataLogger";
+
 
             thread1.Start();
-            //thread2.Start();
+            thread2.Start();
+            thread3.Start();
         }
     }
 }

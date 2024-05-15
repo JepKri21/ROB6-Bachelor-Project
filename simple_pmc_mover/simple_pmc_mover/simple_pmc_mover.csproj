@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Reference Include="PMCLIB">
-      <HintPath>..\..\..\..\..\..\Downloads\PMI_Simple_Demo (2)\Library\PMCLIB.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\Acropos code\csharp\PMCLIB.dll</HintPath>
     </Reference>
   </ItemGroup>
 
