@@ -48,7 +48,7 @@ namespace simple_pmc_mover
             {
                 while (_serialPort.IsOpen == false)
                 {
-                    //_serialPort.Open();
+                    _serialPort.Open();
                 }
 
                
@@ -59,9 +59,10 @@ namespace simple_pmc_mover
                 for (int i = 0; i < sides_to_fill; i++)
                 {
                     DetectCapping(xbot_ids);
+                    
                     for (int j = 0; j < syringes_to_fill; j++)
                     {
-                        
+                       
 
                         //Console.WriteLine("the gates are open");
                         _serialPort.WriteLine(SOT.ToString());
@@ -88,8 +89,8 @@ namespace simple_pmc_mover
                             status = _xbotCommand.GetXbotStatus(xbot_ids[4]);
                         }
                         _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0, 0.015, 0, 0.5, 1);
-
                         
+                         
                     }
 
                     if (i < 3)
@@ -101,7 +102,8 @@ namespace simple_pmc_mover
                     }
                     else
                     {
-                        _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                        _xbotCommand.LinearMotionSI(300, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.120, 0, 0.5, 1);
+
                     }
                 }
                 _serialPort.Close();
