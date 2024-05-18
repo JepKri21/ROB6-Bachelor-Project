@@ -305,6 +305,8 @@ namespace simple_pmc_mover
         public WaitUntilTriggerParams lineDenesterGrips(int[] lineDenesterIDs, int line_number,  WaitUntilTriggerParams wait_params, ushort command_label, bool shifted, bool second_run)
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
+            WaitUntilTriggerParams internal_params = new WaitUntilTriggerParams();
+
 
             //Some of these wait commands might need to be only for one the de-nest xbots, as one has to
             //wait on the other since they don't move the same amount
@@ -315,8 +317,14 @@ namespace simple_pmc_mover
             }
             else if (second_run == true)
             {
-                _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
-                _xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, wait_params);
+                _xbotCommand.WaitUntil(678, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
+
+                internal_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                internal_params.triggerXbotID = lineDenesterIDs[0];
+                internal_params.triggerCmdLabel = 678;
+
+
+                _xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, internal_params);
             }
 
             //Denester moves closer
@@ -525,7 +533,7 @@ namespace simple_pmc_mover
             internal_params.triggerCmdLabel = 333;
 
             _xbotCommand.WaitUntil(0, fullcarrier, TRIGGERSOURCE.CMD_LABEL, internal_params);
-            _xbotCommand.LinearMotionSI(444, fullcarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.840 , 0, 0.5, 0.5);
+            _xbotCommand.LinearMotionSI(0, fullcarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.840 , 0, 0.5, 0.5);
 
             _xbotCommand.LinearMotionSI(command_label, emptycarrier, POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.120, 0.120, 0, 0.3, 0.3);
 
@@ -899,12 +907,16 @@ namespace simple_pmc_mover
 
                         if (i== 4)
                         {
+
                             //The wait commands here are a bit iffy, I think it is something within the function itself which I made to avoid exactly this.
                             De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, true); //Something here doesn't work, the rest should
 
                         }
-                        De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, Switch_carriers, 2040, shifting, false);
-                        
+                        else
+                        {
+                            De_nester_grips = lineDenesterGrips(lineDeNesterIDs, i, De_nester_approach, 2045, shifting, false);
+                        }
+
                         De_nester_moves_to_carrier = lineDenesterMovesToCarrier(lineDeNesterIDs, De_nester_grips, 2050);
 
                         Lowering_syringes = lowerSyringesIntoCarrier(lineDeNesterIDs, De_nester_moves_to_carrier, 2060);
@@ -934,7 +946,6 @@ namespace simple_pmc_mover
                     _xbotCommand.MotionBufferControl(xbot_ids[4], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
                     _xbotCommand.MotionBufferControl(xbot_ids[5], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
                     _xbotCommand.MotionBufferControl(xbot_ids[6], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
-
                     _xbotCommand.MotionBufferControl(xbot_ids[7], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
                     _xbotCommand.MotionBufferControl(xbot_ids[8], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
                     
