@@ -106,7 +106,7 @@ namespace simple_pmc_mover
                         // full Demo
                         // we assume that we always start after the tubs and gearlifts have been reset using their respective
                         // Initial position commands
-                        Console.WriteLine("we begin baby");
+                        Console.WriteLine("Movement starts, Iterations: " + (i+1));
                         /*
                         _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.295, 0.252, 0, 0.1, 0.1);
                         _xbotCommand.LinearMotionSI(0, xbot_ids[5], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.295, 0.73, 0, 0.1, 0.1);
@@ -287,7 +287,15 @@ namespace simple_pmc_mover
                         // The nest out into open space
                         MoveRelativeTogether(0, xbot_ids[4], xbot_ids[5], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
                         MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], -0.245, Movement.DIRECTION.Y, 0.15, 0.5);
-                        
+
+                        time_params.delaySecs = 5;
+
+                        _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.TIME_DELAY, time_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[5], TRIGGERSOURCE.TIME_DELAY, time_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[6], TRIGGERSOURCE.TIME_DELAY, time_params);
+                        _xbotCommand.WaitUntil(0, xbot_ids[7], TRIGGERSOURCE.TIME_DELAY, time_params);
+
+
                         // move the nest back under the gear lift
                         MoveRelativeTogether(1, xbot_ids[4], xbot_ids[5], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
                         MoveRelativeTogether(0, xbot_ids[6], xbot_ids[7], 0.245, Movement.DIRECTION.Y, 0.15, 0.5);
@@ -441,7 +449,7 @@ namespace simple_pmc_mover
                        
 
 
-                        Console.WriteLine("we have reached the end");
+                        Console.WriteLine("Motions stops");
                         XBotStatus gear_status = _xbotCommand.GetXbotStatus(xbot_ids[0]);
                         status = _xbotCommand.GetXbotStatus(xbot_ids[6]);
                         while (status.XBOTState != XBOTSTATE.XBOT_IDLE && gear_status.XBOTState != XBOTSTATE.XBOT_IDLE)
