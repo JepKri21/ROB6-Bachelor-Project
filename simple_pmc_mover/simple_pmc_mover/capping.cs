@@ -7,6 +7,7 @@ using System.IO.Ports;
 using System.Xml.Serialization;
 using System.Diagnostics;
 using PMCLIB;
+using System.Security.Cryptography;
 
 namespace simple_pmc_mover
 {
@@ -58,7 +59,7 @@ namespace simple_pmc_mover
 
                 for (int i = 0; i < sides_to_fill; i++)
                 {
-                    DetectCapping(xbot_ids);
+                    DetectCapping2(xbot_ids);
                     
                     for (int j = 0; j < syringes_to_fill; j++)
                     {
@@ -176,6 +177,64 @@ namespace simple_pmc_mover
             double referenceX = 0.111;
             double referenceY = 0.293;
             double distance = Math.Sqrt(Math.Pow(x - referenceX, 2) + Math.Pow(y - referenceY, 2));
+            return distance < threshold;
+        }
+
+        void DetectCapping2(int[] XID)
+        {
+            int[] carrier_xbotIDs = { XID[4], XID[5], XID[6], XID[7] };
+            double threshold = 0.0001;
+
+            // Define the reference position and increments in meters (15 mm = 0.015 meters)
+            double referenceX = 0.111;
+            double referenceY = 0.293;
+            double increment = 0.015;
+
+            // Create an array of positions to check
+            double[,] positionsToCheck = new double[10, 2];
+            for (int i = 0; i < 10; i++)
+            {
+                positionsToCheck[i, 0] = referenceX; // X position remains constant
+                positionsToCheck[i, 1] = referenceY + i * increment; // Increment Y position
+            }
+
+            bool detected = false;
+
+            for (int botIndex = 0; botIndex < carrier_xbotIDs.Length; botIndex++)
+            {
+                while (!detected)
+                {
+                    XBotStatus status = _xbotCommand.GetXbotStatus(carrier_xbotIDs[botIndex]);
+                    double[] position = status.FeedbackPositionSI;
+
+                    for (int i = 0; i < positionsToCheck.GetLength(0); i++)
+                    {
+                        if (IsObjectWithinThreshold2(position[0], position[1], positionsToCheck[i, 0], positionsToCheck[i, 1], threshold))
+                        {
+                            detected = true;
+                            break;
+                        }
+                    }
+
+                    if (detected)
+                    {
+                        break;
+                    }
+                }
+
+                if (detected)
+                {
+                    break;
+                }
+            }
+
+            //Console.WriteLine("detected lets go");
+        }
+
+        static bool IsObjectWithinThreshold2(double x, double y, double refX, double refY, double threshold)
+        {
+            // Check if the distance between (x, y) and (refX, refY) is less than the threshold
+            double distance = Math.Sqrt(Math.Pow(x - refX, 2) + Math.Pow(y - refY, 2));
             return distance < threshold;
         }
 

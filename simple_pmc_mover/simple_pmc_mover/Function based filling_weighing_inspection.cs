@@ -2,7 +2,9 @@
 using PMCLIB;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +49,38 @@ namespace simple_pmc_mover
 
             return CMD_params;
         }
+
+        public WaitUntilTriggerParams cappingProcces( int carrierID, WaitUntilTriggerParams wait_params, ushort command_label)
+        {
+            WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
+            
+            
+
+            for (int j = 0; j < 10; j++)
+            {
+                                
+                _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.RELATIVE, LINEARPATHTYPE.DIRECT, 0, 0.015, 0, 0.5, 1);
+
+
+            }
+
+            if (i < 3)
+            {
+                _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.5, 1);
+                _xbotCommand.RotaryMotionP2P(0, xbot_ids[4], ROTATIONMODE.WRAP_TO_2PI_CW, 1.570796, 3, 6, POSITIONMODE.RELATIVE);
+                _xbotCommand.LinearMotionSI(4, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, start_position[0], start_position[1], 0, 0.5, 1);
+                //rotate the syringe holder
+            }
+            else
+            {
+                _xbotCommand.LinearMotionSI(300, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, 0.360, 0.120, 0, 0.5, 1);
+
+            }
+
+            return CMD_params;
+
+        }
+
 
         public WaitUntilTriggerParams unitCarrierToFilling(int carrierID, WaitUntilTriggerParams wait_params) 
         {
