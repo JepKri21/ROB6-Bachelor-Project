@@ -37,7 +37,7 @@ namespace simple_pmc_mover
 ____________________________________________________________________| ";
 
         //If ID is always the same use outcommented line
-        public int[] xbot_ids = {5,7,3,6,4,8,2,1};
+        public int[] xbot_ids = {1,5,8,4,2,3,6,7};
         //int[] xbot_ids;
 
        
