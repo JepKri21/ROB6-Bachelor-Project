@@ -328,9 +328,9 @@ namespace simple_pmc_mover
             }
 
             //Denester moves closer
-            double line_pusher_increment = 0.0127;
+            double line_pusher_increment = 0.0123;
             //double[] linedenester_end = { 0.527, 0.475, 0.527, 0.328 };
-            double[] linedenester_end = { 0.525, 0.475, 0.525, 0.328 };
+            double[] linedenester_end = { 0.525, 0.479, 0.525, 0.332 };
             double line_shift = 0.0152 / 2;
 
             /*
@@ -374,9 +374,10 @@ namespace simple_pmc_mover
             double[] linedenester_totheside = { 0.445, 0.360, 0.445, 0.179 };
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside[0], linedenester_totheside[1], 0, 0.1, 0.1);
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside[2], linedenester_totheside[3], 0, 0.1, 0.1);
+            
             //rotates
-            _xbotCommand.ArcMotionMetersRadians(0, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.65);
-            _xbotCommand.ArcMotionMetersRadians(111, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.65 - 1.570796);
+            _xbotCommand.ArcMotionMetersRadians(0, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60);
+            _xbotCommand.ArcMotionMetersRadians(111, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60 - 1.570796);
             
             //Moves to carrier
             internal_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
@@ -386,16 +387,16 @@ namespace simple_pmc_mover
             _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, internal_params);
 
 
-            double[] linedenester_to_unitcarrier = { 0.364, 0.120, 0.554, 0.120 };
+            double[] linedenester_to_unitcarrier = { 0.364, 0.120, 0.558, 0.120 };
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.1, 0.1);
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.1, 0.1);
-            _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier[0], linedenester_to_unitcarrier[1], 0, 0.12, 0.1);
-            _xbotCommand.LinearMotionSI(command_label, lineDenesterIDs[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier[2], linedenester_to_unitcarrier[3], 0, 0.1, 0.1);
+            _xbotCommand.LinearMotionSI(command_label, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier[0], linedenester_to_unitcarrier[1], 0, 0.12, 0.1);
+            _xbotCommand.LinearMotionSI(0, lineDenesterIDs[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier[2], linedenester_to_unitcarrier[3], 0, 0.1, 0.1);
 
             
 
             CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
-            CMD_params.triggerXbotID = lineDenesterIDs[1];
+            CMD_params.triggerXbotID = lineDenesterIDs[0];
             CMD_params.triggerCmdLabel = command_label;
 
             return CMD_params;
@@ -405,12 +406,17 @@ namespace simple_pmc_mover
         {
             WaitUntilTriggerParams CMD_params = new WaitUntilTriggerParams();
             WaitUntilTriggerParams internal_params = new WaitUntilTriggerParams();
+            WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
 
-            _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, wait_params);
+            _xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, wait_params);
             //_xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.CMD_LABEL, wait_params);
 
+            time_params.delaySecs = 1;
+
+            _xbotCommand.WaitUntil(0, lineDenesterIDs[1], TRIGGERSOURCE.TIME_DELAY, time_params);
+
             // lower syringes into unit carrier first step
-            _xbotCommand.LinearMotionSI(99, lineDenesterIDs[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.035, 0, 0, 0.01, 0.05);
+            _xbotCommand.LinearMotionSI(99, lineDenesterIDs[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.038, 0, 0, 0.01, 0.05);
 
             //Lower syringes into unit carrier
             internal_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
@@ -467,8 +473,8 @@ namespace simple_pmc_mover
 
 
             // rotate line de-nester
-            _xbotCommand.ArcMotionMetersRadians(0, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.65);
-            _xbotCommand.ArcMotionMetersRadians(command_label, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.65 - 1.570796);
+            _xbotCommand.ArcMotionMetersRadians(0, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60);
+            _xbotCommand.ArcMotionMetersRadians(command_label, lineDenesterIDs[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60 - 1.570796);
             
             CMD_params.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
             CMD_params.triggerXbotID = lineDenesterIDs[1];
