@@ -64,17 +64,17 @@ namespace simple_pmc_mover
                 {
                     DetectCapping(cariier_xbotIDs);
 
-                    Console.WriteLine("the gates are open");
+                    //Console.WriteLine("the gates are open");
                     _serialPort.WriteLine(SOT.ToString());
                     _serialPort.WriteLine(PIN);
                     _serialPort.WriteLine(EOT.ToString());
 
-                    Console.WriteLine("eot send");
+                    //Console.WriteLine("eot send");
 
                     while (finished_cap == false)
                     {
                         // do nothing
-                        Console.WriteLine("entered receive loop");
+                        //Console.WriteLine("entered receive loop");
                         finished_cap = ReceiveData(_serialPort);
 
                     }
@@ -85,7 +85,7 @@ namespace simple_pmc_mover
                 _serialPort.Close();
                 carrierIndex = -1;
 
-                Console.WriteLine("Serial port close" + "carrier index" + carrierIndex);
+                //Console.WriteLine("Serial port close" + "carrier index" + carrierIndex);
 
             }
         }
