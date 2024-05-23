@@ -1,0 +1,88 @@
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.AssemblyReference.cache
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfoInputs.cache
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfo.cs
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CoreCompileInputs.cache
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.exe
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.deps.json
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.runtimeconfig.json
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.dll
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.xml
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CopyComplete
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\refint\simple_pmc_mover.dll
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
+C:\Users\chris\Desktop\Acropos code\csharp\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.exe
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.deps.json
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.runtimeconfig.json
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.xml
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.AssemblyReference.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfoInputs.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfo.cs
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CoreCompileInputs.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CopyComplete
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\refint\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.exe
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.deps.json
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.runtimeconfig.json
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.dll
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.xml
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.AssemblyReference.cache
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfoInputs.cache
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfo.cs
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CoreCompileInputs.cache
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CopyComplete
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\refint\simple_pmc_mover.dll
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
+C:\Users\astri\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.exe
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.deps.json
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.runtimeconfig.json
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\PMCLIB.xml
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.AssemblyReference.cache
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfoInputs.cache
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.AssemblyInfo.cs
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CoreCompileInputs.cache
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.csproj.CopyComplete
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\refint\simple_pmc_mover.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.pdb
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\simple_pmc_mover.genruntimeconfig.cache
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\obj\Debug\net6.0\ref\simple_pmc_mover.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\System.IO.Ports.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm\native\libSystem.IO.Ports.Native.so
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm64\native\libSystem.IO.Ports.Native.so
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-x64\native\libSystem.IO.Ports.Native.so
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-arm64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.IO.Ports.dll
+C:\Users\chris\Documents\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-arm64\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\linux-x64\native\libSystem.IO.Ports.Native.so
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-arm64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.IO.Ports.dll
+C:\Users\jeppe\OneDrive\Dokumenter\GitHub\Acopos\simple_pmc_mover\simple_pmc_mover\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.IO.Ports.dll
