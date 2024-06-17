@@ -1393,11 +1393,12 @@ namespace simple_pmc_mover
 
                     _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
 
-                    double[] linedenester43 = { 0.529 - 0.0076, 0.493 + line_pusher_increment1*3, 0.529 - 0.0076, 0.302 + line_pusher_increment1*3 };
+                    //double[] linedenester43 = { 0.529 - 0.0076, 0.493 + line_pusher_increment1*3, 0.529 - 0.0076, 0.302 + line_pusher_increment1*3 };
+                    double[] linedenester43 = { 0.529 - 0.0076, 0.524, 0.529 - 0.0076, 0.328 };
                     _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester42[2], linedenester43[3], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(6, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester43[0], linedenester43[1], 0, 0.11, 0.1);
 
-
+                    /*
                     CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                     CMD_params1.triggerXbotID = lineDeNesterIDs1[0];
                     CMD_params1.triggerCmdLabel = 6;
@@ -1411,7 +1412,8 @@ namespace simple_pmc_mover
                     _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.TIME_DELAY, time_params);
 
                     _xbotCommand.LinearMotionSI(7, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.310 + line_pusher_increment1*3, 0, 0.01, 0.01);
-                    /*
+
+                    
                     CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
                     CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
                     CMD_params1.triggerCmdLabel = 7;
