@@ -975,9 +975,12 @@ namespace simple_pmc_mover
                     int[] lineDeNesterIDs1 = { xbot_ids[5], xbot_ids[6] };
                     int[] unitCarrierIDs1 = { xbot_ids[7], xbot_ids[8] };
 
+                    Closing_scissor_lift = closingScissorlift(scissorLiftIDs1, 1000);
+
+                    WaitUntilTriggerParams time_params = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams CMD_params1 = new WaitUntilTriggerParams();
                     WaitUntilTriggerParams internal_params = new WaitUntilTriggerParams();
-
+                    double line_pusher_increment1 = 0.0127;
                     double[] linepusher_end1 = { 0.525, 0.682 };
                     _xbotCommand.LinearMotionSI(0, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_end1[0], linepusher_end1[1], 0, 0.5, 0.5);
 
@@ -1014,11 +1017,12 @@ namespace simple_pmc_mover
                     _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
 
 
-                    double[] linedenester_to_unitcarrier1 = { 0.361, 0.120, 0.495, 0.120 };
+                    double[] linedenester_to_unitcarrier1 = { 0.343, 0.120, 0.474, 0.120 };
                     _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[0], linedenester_to_unitcarrier1[1], 0, 0.1, 0.1);
                     _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[2], linedenester_to_unitcarrier1[3], 0, 0.1, 0.1);
 
-                    double[] Lift_syringes = { 0.551, 0.120 };
+
+                    double[] Lift_syringes = { 0.540, 0.120 };
                     _xbotCommand.LinearMotionSI(4, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, Lift_syringes[0], Lift_syringes[1], 0, 0.1, 0.1);
 
                     CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
@@ -1040,20 +1044,399 @@ namespace simple_pmc_mover
 
                     _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
 
-                    double[] linedenester4 = { 0.525, 0.473, 0.525, 0.281 };
+                    double[] linedenester4 = { 0.529, 0.493, 0.529, 0.302 };
                     _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester4[2], linedenester4[3], 0, 0.1, 0.1);
-                    _xbotCommand.LinearMotionSI(6, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester4[0], linedenester4[1], 0, 0.105, 0.1);
+                    _xbotCommand.LinearMotionSI(6, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester4[0], linedenester4[1], 0, 0.11, 0.1);
 
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[0];
+                    CMD_params1.triggerCmdLabel = 6;
+
+
+                    _xbotCommand.WaitUntil(0, unitCarrierIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+                    _xbotCommand.LinearMotionSI(0, unitCarrierIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(0, unitCarrierIDs1[0], ROTATIONMODE.WRAP_TO_2PI_CW, 1.57076, 2, 2, POSITIONMODE.RELATIVE);
+
+                    time_params.delaySecs = 1;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[1], TRIGGERSOURCE.TIME_DELAY, time_params);
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.TIME_DELAY, time_params);
+
+                    _xbotCommand.LinearMotionSI(7, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.310, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 7;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+
+                    _xbotCommand.LinearMotionSI(8, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.334, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 8;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester_back1 = { 0.527, 0.360, 0.527, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[0], linedenester_back1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(9, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[2], linedenester_back1[3], 0, 0.2, 0.2);
+
+
+                    //First line complete ---------------------------------------------------------------
+                    //Now moving scissorlift and 
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 9;
+
+                    Lift_scissor_lift = liftingScissorLift(scissorLiftIDs1, CMD_params1, 1080);
+
+                    _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, Lift_scissor_lift);
+
+                    double[] linepusher_end2 = { 0.525, 0.682 + line_pusher_increment1 };
+                    _xbotCommand.LinearMotionSI(10, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_end2[0], linepusher_end2[1], 0, 0.5, 0.5);
+
+
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[2], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    // Scissorlift has moved------------------------------------------------------------------------
+
+                    //double[] linedenester_totheside1 = { 0.445, 0.360, 0.445, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[0], linedenester_totheside1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[2], linedenester_totheside1[3], 0, 0.2, 0.2);
+
+                    //rotates
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(1, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 1;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(2, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.049, -0.240, 0, 0.2, 0.2);
+
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 2;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+
+                    //double[] linedenester_to_unitcarrier1 = { 0.343, 0.120, 0.474, 0.120 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[0], linedenester_to_unitcarrier1[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[2], linedenester_to_unitcarrier1[3], 0, 0.1, 0.1);
+
+
+                    //double[] Lift_syringes = { 0.540, 0.120 };
+                    _xbotCommand.LinearMotionSI(4, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, Lift_syringes[0], Lift_syringes[1], 0, 0.1, 0.1);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 4;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester3 = { 0.445, 0.360, 0.626, 0.360 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[0], linedenester3[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[2], linedenester3[3], 0, 0.1, 0.1);
+
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.5, 0.5, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(5, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 5;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    double[] linedenester41 = {0.529 - 0.0076, 0.493 + line_pusher_increment1, 0.529 - 0.0076, 0.302 + line_pusher_increment1 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester41[2], linedenester41[3], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(6, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester41[0], linedenester41[1], 0, 0.11, 0.1);
+
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[0];
+                    CMD_params1.triggerCmdLabel = 6;
+
+
+                    _xbotCommand.WaitUntil(0, unitCarrierIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+                    _xbotCommand.LinearMotionSI(0, unitCarrierIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(0, unitCarrierIDs1[0], ROTATIONMODE.WRAP_TO_2PI_CW, 1.57076, 2, 2, POSITIONMODE.RELATIVE);
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[1], TRIGGERSOURCE.TIME_DELAY, time_params);
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.TIME_DELAY, time_params);
+
+                    _xbotCommand.LinearMotionSI(7, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.310+line_pusher_increment1, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 7;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+
+                    _xbotCommand.LinearMotionSI(8, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.334+line_pusher_increment1, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 8;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester_back1 = { 0.527, 0.360, 0.527, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[0], linedenester_back1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(9, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[2], linedenester_back1[3], 0, 0.2, 0.2);
+
+
+                    //First line complete ---------------------------------------------------------------
+                    //Now moving scissorlift and 
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 9;
+
+                    Lift_scissor_lift = liftingScissorLift(scissorLiftIDs1, CMD_params1, 1080);
+
+                    _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, Lift_scissor_lift);
+
+                    double[] linepusher_end3 = { 0.525, 0.682 + line_pusher_increment1*2 };
+                    _xbotCommand.LinearMotionSI(10, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_end3[0], linepusher_end3[1], 0, 0.5, 0.5);
+
+
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[2], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    // Scissorlift has moved------------------------------------------------------------------------
+
+                    //double[] linedenester_totheside1 = { 0.445, 0.360, 0.445, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[0], linedenester_totheside1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[2], linedenester_totheside1[3], 0, 0.2, 0.2);
                     
-                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.525, 0.322, 0, 0.01, 0.01);
+                    //rotates
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(20, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 20;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(21, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.049, -0.240, 0, 0.2, 0.2);
 
 
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 21;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
 
 
+                    //double[] linedenester_to_unitcarrier1 = { 0.343, 0.120, 0.474, 0.120 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[0], linedenester_to_unitcarrier1[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[2], linedenester_to_unitcarrier1[3], 0, 0.1, 0.1);
 
 
+                    //double[] Lift_syringes = { 0.540, 0.120 };
+                    _xbotCommand.LinearMotionSI(22, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, Lift_syringes[0], Lift_syringes[1], 0, 0.1, 0.1);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 22;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester3 = { 0.445, 0.360, 0.626, 0.360 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[0], linedenester3[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[2], linedenester3[3], 0, 0.1, 0.1);
+
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.5, 0.5, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(23, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 23;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    double[] linedenester42 = { 0.529, 0.493 + line_pusher_increment1* 2, 0.529, 0.302 + line_pusher_increment1* 2 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester42[2], linedenester42[3], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(24, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester42[0], linedenester42[1], 0, 0.11, 0.1);
 
 
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[0];
+                    CMD_params1.triggerCmdLabel = 24;
+
+
+                    _xbotCommand.WaitUntil(0, unitCarrierIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+                    _xbotCommand.LinearMotionSI(0, unitCarrierIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(0, unitCarrierIDs1[0], ROTATIONMODE.WRAP_TO_2PI_CW, 1.57076, 2, 2, POSITIONMODE.RELATIVE);
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[1], TRIGGERSOURCE.TIME_DELAY, time_params);
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.TIME_DELAY, time_params);
+
+                    _xbotCommand.LinearMotionSI(25, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.310 + line_pusher_increment1 *2, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 25;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+
+                    _xbotCommand.LinearMotionSI(26, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.334 + line_pusher_increment1* 2, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 26;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester_back1 = { 0.527, 0.360, 0.527, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[0], linedenester_back1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(9, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[2], linedenester_back1[3], 0, 0.2, 0.2);
+
+                    //First line complete ---------------------------------------------------------------
+                    //Now moving scissorlift and 
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 9;
+
+                    Lift_scissor_lift = liftingScissorLift(scissorLiftIDs1, CMD_params1, 1080);
+
+                    _xbotCommand.WaitUntil(0, xbot_ids[4], TRIGGERSOURCE.CMD_LABEL, Lift_scissor_lift);
+
+                    double[] linepusher_end4 = { 0.525, 0.682 + line_pusher_increment1 *3 };
+                    _xbotCommand.LinearMotionSI(10, xbot_ids[4], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linepusher_end4[0], linepusher_end4[1], 0, 0.5, 0.5);
+
+
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    _xbotCommand.LinearMotionSI(0, scissorLiftIDs1[2], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, 0.04, 0, 0.05, 0.1);
+                    // Scissorlift has moved------------------------------------------------------------------------
+
+                    //double[] linedenester_totheside1 = { 0.445, 0.360, 0.445, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[0], linedenester_totheside1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_totheside1[2], linedenester_totheside1[3], 0, 0.2, 0.2);
+
+                    //rotates
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(1, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.1, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 1;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(2, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.049, -0.240, 0, 0.2, 0.2);
+
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 2;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+
+                    //double[] linedenester_to_unitcarrier1 = { 0.343, 0.120, 0.474, 0.120 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[0], linedenester_to_unitcarrier1[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier1[2], linedenester_to_unitcarrier1[3], 0, 0.1, 0.1);
+
+
+                    //double[] Lift_syringes = { 0.540, 0.120 };
+                    _xbotCommand.LinearMotionSI(4, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, Lift_syringes[0], Lift_syringes[1], 0, 0.1, 0.1);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 4;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester3 = { 0.445, 0.360, 0.626, 0.360 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[0], linedenester3[1], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester3[2], linedenester3[3], 0, 0.1, 0.1);
+
+                    _xbotCommand.ArcMotionMetersRadians(0, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.CLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.5, 0.5, 0.179, 1.60);
+                    _xbotCommand.ArcMotionMetersRadians(5, lineDeNesterIDs1[1], ARCMODE.CENTERANGLE, ARCTYPE.MINORARC, ARCDIRECTION.COUNTERCLOCKWISE, POSITIONMODE.ABSOLUTE, 0.445, 0.360, 0, 0.05, 0.1, 0.179, 1.60 - 1.570796);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 5;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    double[] linedenester43 = { 0.529 - 0.0076, 0.493 + line_pusher_increment1*3, 0.529 - 0.0076, 0.302 + line_pusher_increment1*3 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester42[2], linedenester43[3], 0, 0.1, 0.1);
+                    _xbotCommand.LinearMotionSI(6, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, linedenester43[0], linedenester43[1], 0, 0.11, 0.1);
+
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[0];
+                    CMD_params1.triggerCmdLabel = 6;
+
+
+                    _xbotCommand.WaitUntil(0, unitCarrierIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+                    _xbotCommand.LinearMotionSI(0, unitCarrierIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.DIRECT, 0.120, 0.120, 0, 0.1, 0.1);
+                    _xbotCommand.RotaryMotionP2P(0, unitCarrierIDs1[0], ROTATIONMODE.WRAP_TO_2PI_CW, 1.57076, 2, 2, POSITIONMODE.RELATIVE);
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[1], TRIGGERSOURCE.TIME_DELAY, time_params);
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.TIME_DELAY, time_params);
+
+                    _xbotCommand.LinearMotionSI(7, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.310 + line_pusher_increment1*3, 0, 0.01, 0.01);
+                    /*
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 7;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, -0.004, -0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0.002, 0, 0, 1, 2);
+
+                    _xbotCommand.LinearMotionSI(8, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.XTHENY, 0.529, 0.334 + line_pusher_increment1*3, 0, 0.01, 0.01);
+
+                    CMD_params1.CmdLabelTriggerType = TRIGGERCMDLABELTYPE.CMD_FINISH;
+                    CMD_params1.triggerXbotID = lineDeNesterIDs1[1];
+                    CMD_params1.triggerCmdLabel = 8;
+
+                    _xbotCommand.WaitUntil(0, lineDeNesterIDs1[0], TRIGGERSOURCE.CMD_LABEL, CMD_params1);
+
+                    //double[] linedenester_back1 = { 0.527, 0.360, 0.527, 0.179 };
+                    _xbotCommand.LinearMotionSI(0, lineDeNesterIDs1[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[0], linedenester_back1[1], 0, 0.2, 0.2);
+                    _xbotCommand.LinearMotionSI(9, lineDeNesterIDs1[1], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_back1[2], linedenester_back1[3], 0, 0.2, 0.2);
+                    */
 
 
                     _xbotCommand.MotionBufferControl(xbot_ids[0], MOTIONBUFFEROPTIONS.RELEASEBUFFER);
