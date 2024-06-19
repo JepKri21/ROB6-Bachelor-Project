@@ -388,7 +388,7 @@ namespace simple_pmc_mover
             _xbotCommand.WaitUntil(0, lineDenesterIDs[0], TRIGGERSOURCE.CMD_LABEL, internal_params);
 
             //double[] linedenester_to_unitcarrier = { 0.364, 0.120, 0.558, 0.120 };
-            double[] linedenester_to_unitcarrier = { 0.340, 0.120, 0.534, 0.120 };
+            double[] linedenester_to_unitcarrier = { 0.341, 0.120, 0.535, 0.120 };
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.2, 0.2);
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[1], POSITIONMODE.RELATIVE, LINEARPATHTYPE.YTHENX, 0, -0.240, 0, 0.2, 0.2);
             _xbotCommand.LinearMotionSI(0, lineDenesterIDs[0], POSITIONMODE.ABSOLUTE, LINEARPATHTYPE.YTHENX, linedenester_to_unitcarrier[0], linedenester_to_unitcarrier[1], 0, 0.12, 0.1);
